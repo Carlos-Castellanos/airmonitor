@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+{% endblock link %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+
+{% block content %}
+<div class="border">
+    {% static "" as baseUrl %}
+    <img class="img-fluid rounded-start" src="{{ baseUrl }}/media/{{post.image}}" alt="My image">
+    <h1 id="ptitle">Title: {{ post.title }}</h1>
+    <h2>Subtitle: {{ post.subtitle }}</h2>
+    <strong>By {{ post.author}} | Create on: {{ post.created_on }}</strong>
+
+    <p id="paraph">Content</p>
+    <div class="container" id="postbox"">
+        <p>{{ post.body }}</p>
+    </div>
+
+</div>
+
+{% if user.id == post.author.id %}
+    <p>
+        <a href=" {% url 'post_edit' pk=post.id %}" class="btn btn-success"> Edit</a>
+        </p>
+        <p>
+            <a href="{% url 'post_delete' pk=post.id %}" class="btn btn-danger"> Delete </a>
+        </p>
+        {% endif %}
+
+
+        {% endblock content %}

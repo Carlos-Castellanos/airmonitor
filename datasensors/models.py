@@ -4,16 +4,14 @@ from django.urls import reverse
 
 # Create your models here.
 class DataSensor(models.Model):
-
-sensorID
     measurementDateTime =  models.DateTimeField()
-    Latitude = models.DecimalField(..., max_digits=18, decimal_places=15)
-    Longitude = models.DecimalField(..., max_digits=18, decimal_places=15)
-    Temperature =  models.DecimalField(..., max_digits=6, decimal_places=2)
-    Humidity =  models.DecimalField(..., max_digits=6, decimal_places=2)
-    Pression =  models.DecimalField(..., max_digits=6, decimal_places=2)
-    Altitud =  models.DecimalField(..., max_digits=6, decimal_places=2)
-    PM10 =  models.DecimalField(..., max_digits=6, decimal_places=2)
+    Latitude = models.DecimalField(default=0, max_digits=8, decimal_places=5)
+    Longitude =  models.DecimalField(default=0, max_digits=8, decimal_places=5)
+    Temperature =   models.DecimalField(default=0, max_digits=6, decimal_places=2)
+    Humidity =   models.DecimalField(default=0, max_digits=6, decimal_places=2)
+    Pression =   models.DecimalField(default=0, max_digits=6, decimal_places=2)
+    PM25 =   models.DecimalField(default=0, max_digits=6, decimal_places=2)
+    PM10 =  models.DecimalField(default=0, max_digits=6, decimal_places=2)
     sensor = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE

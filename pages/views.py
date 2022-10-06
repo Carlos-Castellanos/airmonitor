@@ -13,12 +13,6 @@ class MapsPageView(TemplateView):
 class GraphPageView(TemplateView):
     template_name = "graphs.html"
 
-class SensorPageView(TemplateView):
-    template_name = "sensor.html"
-
-class AdminSensorPageView(TemplateView):
-    template_name = "adminsensor.html"
-
 class AboutPageView(TemplateView):
     template_name = "about.html"
 

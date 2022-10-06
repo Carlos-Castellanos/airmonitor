@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}sensor{% endblock title %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Temperature</th>
+                    <th scope="col">Humidity</th>
+                    <th scope="col">Pression</th>
+                    <th scope="col">PM25</th>
+                    <th scope="col">PM10</th>
+                </tr>
+            </thead>
+            <tbody class="table-info">
+                {% for sensor in sensor_list %}
+                <tr>
+                    <td> {{ sensor.name }} </td>
+                    <td> {{ sensor.Latitude }} </td>
+                    <td> {{ sensor.Longitude }} </td>
+                    <td> {{ sensor.Temperature }} </td>
+                    <td> {{ sensor.Humidity }} </td>
+                    <td> {{ sensor.Pression }} </td>
+                    <td> {{ sensor.PM25 }} </td>
+                    <td> {{ sensor.PM10 }} </td>
+                    <td><a href="{% url 'sensor_edit' pk=sensor.id %}" class="btn btn-success"> Edit</a></td>
+                    <td><a href="{% url 'sensor_delete' pk=sensor.id %}" class="btn btn-danger"> Delete </a></td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</form>
+{% endblock content %}

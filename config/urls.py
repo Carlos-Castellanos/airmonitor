@@ -20,5 +20,8 @@ from django.contrib.auth import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('pages.urls'))
-]
+    path('', include('pages.urls')),                   
+    path('sensors/',include('sensors.urls')),  
+    path('datasensors/',include('datasensors.urls')),             
+  
+]  

@@ -25,9 +25,22 @@
                     <a class="nav-link active" aria-current="page" href="{%  url 'home' %}">Home</a>
                     <a class="nav-link" href="{%  url 'graphs' %}">Graphs</a>
                     <a class="nav-link" href="{%  url 'maps' %}">Maps</a>
-                    <a class="nav-link " href="{%  url 'sensor' %}">Sensor</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Sensors
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href='sensor_detail'>Sensor readings</a></li>
+                            <li><a class="dropdown-item" href="{% url 'sensor_list' %}">List Sensors</a></li>
+                            <li><a class="dropdown-item" href="{% url 'sensor_new' %}">New Sensor</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">About</a></li>
+                        </ul>
+                    </li>
                     <a class="nav-link " href="#">Login</a>
-                    <a class="nav-link" href="{%  url 'gmaps' %}">GoogleMaps</a>
                 </div>
             </div>
 
