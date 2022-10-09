@@ -4,7 +4,9 @@ from .views import(
     # DataSensorDetailView,
     DataSensorCreateView,
     # DataSensorDeleteView,
-    # DataSensorUpdateView
+    # DataSensorUpdateView,
+    export_csv, 
+    import_csv,
 )
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView
@@ -18,5 +20,7 @@ urlpatterns = [
     path('new/', DataSensorCreateView.as_view(), name="DataSensor_new"),
     # path('<int:pk>/delete/', DataSensorDeleteView.as_view(), name="DataSensor_delete"),
     # path('<int:pk>/edit/', DataSensorUpdateView.as_view(), name="DataSensor_edit"),
+    path('export/', export_csv, name="datasensor_export"),
+    path('import/', import_csv, name="datasensor_import"),
 
 ]

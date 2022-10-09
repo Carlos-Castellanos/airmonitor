@@ -13,4 +13,4 @@
 
 
 # if __name__ == '__main__':
-#     csv2dataset('direcciones.csv', 'direcciones.sqlite')
+#     csv2dataset('data.csv', 'datasensor.sqlite')

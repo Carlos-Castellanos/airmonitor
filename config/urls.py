@@ -22,6 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pages.urls')),                   
     path('sensors/',include('sensors.urls')),  
-    path('datasensors/',include('datasensors.urls')),             
+    path('measurements/',include('measurements.urls')), 
+    path('core/',include('core.urls')), 
+
+           
   
 ]  

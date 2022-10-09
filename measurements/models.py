@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 # Create your models here.
-class DataSensor(models.Model):
+class Measurements(models.Model):
     name = models.CharField(max_length=10)
     measurementDate =  models.DateField(default=datetime.now, blank=True)
     measurementTime =  models.TimeField(default=datetime.now, blank=True)
@@ -15,13 +15,14 @@ class DataSensor(models.Model):
     Pression =   models.DecimalField(default=0, max_digits=6, decimal_places=2)
     PM25 =   models.DecimalField(default=0, max_digits=6, decimal_places=2)
     PM10 =  models.DecimalField(default=0, max_digits=6, decimal_places=2)
+    id = models.AutoField(primary_key=True)
     # sensor = models.ForeignKey(
     #     get_user_model(),
     #     on_delete=models.CASCADE
     # )
     class Meta:
-        verbose_name = 'DataSensor'
-        verbose_name_plural = 'DataSensors'
+        verbose_name = 'Measurement'
+        verbose_name_plural = 'measurements'
         ordering = ['id']
         
     def __str__(self):

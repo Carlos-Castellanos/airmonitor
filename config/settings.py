@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'pages',
     'sensors',
-    'datasensors',
+    'measurements',
     'accounts',
+    'core'
 
 ]
 
