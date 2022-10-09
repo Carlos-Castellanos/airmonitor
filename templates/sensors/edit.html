@@ -2,12 +2,17 @@
 
 {% block title %}Edit{% endblock title %}
 {% block content %}
-<h1>Edit</h1>
-<br><br>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p}}
-    <input type="submit" value="Edit" class="btn btn-success">
-</form>
-<br><br>
+<div class="container mt-3 table-dark main" style="width: 35%; ">
+    <br>
+    <h1>Edit</h1>
+    <br>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input type="submit" value="Edit" class="btn btn-success">
+        <a class="btn btn-danger" href="{% url 'sensor_list' %}">Cancel</a></li>
+    </form>
+    <br><br>
+</div>
+
 {% endblock content %}

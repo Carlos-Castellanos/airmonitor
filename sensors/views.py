@@ -1,6 +1,6 @@
 from urllib import request
 from django.shortcuts import render
-
+from django.contrib import messages
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import( 
     CreateView, 
@@ -36,6 +36,7 @@ class SensorCreateView(CreateView): #113
     #     form.instance.author = self.request.user
     #     return super().form_valid(form)
 
+
 class SensorUpdateView(UpdateView): #113
     template_name = "sensors/edit.html"  
     model = Sensor
@@ -49,7 +50,7 @@ class SensorUpdateView(UpdateView): #113
 class SensorDeleteView(DeleteView):  #113
     template_name = "sensors/delete.html"  
     model = Sensor
-    success_url = reverse_lazy('Sensor_list')
+    success_url = reverse_lazy('sensor_list')
 
     def test_func(self):                                #113
         obj = self.get_object()

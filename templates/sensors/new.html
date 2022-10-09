@@ -3,14 +3,18 @@
 {% block title %}New Sensor{% endblock title %}
 
 {% block content %}
-<h1 table-dark>New Sensor</h1>
-<div class="container mt-3 table-dark" style="width: 35%; ">
+<div class="container mt-3 table-dark main" style="width: 35%; ">
+    <br>
+    <h1 table-dark>New Sensor</h1>
+
     {% load crispy_forms_filters %}
     <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         {{ form | crispy }}
         <input type="submit" class="btn btn-success" value="Create">
+        <a class="btn btn-danger" href="{% url 'sensor_list' %}">Cancel</a></li>
     </form>
+    <br>
 </div>
 
 {% endblock content %}
