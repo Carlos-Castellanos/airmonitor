@@ -7,6 +7,9 @@ from .views import(
     # MeasurementsUpdateView,
     sensor_export_csv, 
     sensor_import_csv,
+    native_import_csv,
+    simple_upload,
+    showdata,
 )
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView
@@ -22,5 +25,8 @@ urlpatterns = [
     # path('<int:pk>/edit/', MeasurementsUpdateView.as_view(), name="measurements_edit"),
     path('export/', sensor_export_csv, name="measurements_export"),
     path('import/', sensor_import_csv, name="measurements_import"),
+    path('<native_import/', native_import_csv, name="native_import"),
+    path('upload/',simple_upload, name='file_upload'),
+    path('showdata/',showdata, name='measurements_showdata')
 
 ]

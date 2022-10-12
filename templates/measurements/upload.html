@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+{% block content %}
+
+<div class="container mt-3 col-6 main">
+    <div class="row">
+        <div>
+            <form method="post" class="form-signin" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="myfile">
+                <button type="summit">upload file</button>
+            </form>
+            {% if uploaded_file_url %}
+            <p>File updated in: <a href="{{ uploaded_file_url }}"> {{ uploaded_file_url }}</a> </p>
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

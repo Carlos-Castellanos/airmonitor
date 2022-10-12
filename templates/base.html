@@ -25,13 +25,18 @@
                     <a class="nav-link active" aria-current="page" href="{%  url 'home' %}">Home</a>
                     <a class="nav-link" href="{%  url 'graphs' %}">Graphs</a>
                     <a class="nav-link" href="{%  url 'maps' %}">Maps</a>
+                    <a class="nav-link" href="{%  url 'measurements_showdata' %}">tables</a>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Sensors
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'measurements_import' %}">Sensor readings</a></li>
+                            <li><a class="dropdown-item" href="#">measurements_import</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'file_upload' %}">file_upload</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Native import</a></li>
                             <li><a class="dropdown-item" href="{% url 'sensor_list' %}">List Sensors</a></li>
                             <li><a class="dropdown-item" href="{% url 'sensor_new' %}">New Sensor</a></li>
                             <li>
