@@ -172,14 +172,33 @@ def simple_upload(request):
         
 #panda
 def showdata(request):
+    # ['name','measurementDate','measurementTime','Latitude','Longitude','Temperature','Humidity','Pression','PM25','PM10']
     item = Measurements.objects.all().values()
-    # df = pd.DataFrame(item)
     myFrame = pd.DataFrame(item)
+    myFrame=myFrame.rename(columns={'name':'Sensor','measurementDate':'Date','measurementTime':'Time','Latitude':'Lat','Longitude':'Lon','Temperature':'Temp','Humidity':'Hum','Pression':'Pres','PM25':'pm2.5','PM10':'pm10'})
+
+    # convert objetc to float
+    myFrame['Date'] = pd.to_datetime(myFrame['Date'])
+    myFrame['Lat'] = myFrame['Lat'].astype(float, errors = 'raise')
+    myFrame['Lon'] = myFrame['Lon'].astype(float, errors = 'raise')
+    myFrame['Temp'] = myFrame['Temp'].astype(float, errors = 'raise')
+    myFrame['Hum'] = myFrame['Hum'].astype(float, errors = 'raise')
+    myFrame['Pres'] = myFrame['Pres'].astype(float, errors = 'raise')
+    myFrame['pm2.5'] = myFrame['pm2.5'].astype(float, errors = 'raise')
+    myFrame['pm10'] = myFrame['pm10'].astype(float, errors = 'raise')
+
     # df = myFrame.head(5)
-    df = myFrame[(myFrame['name'] == '2') & (myFrame['Pression'] > 12.39)]
-    # df = myFrame.groupby(by = 'name').mean()  error
+    df = myFrame[(myFrame['Sensor'] == '2') & (myFrame['Pres'] > 12.39)]
+    date2 = "2022-01-01"
+    df = myFrame[myFrame['Date'] == date2]
+    # df = myFrame.groupby(by = 'Sensor').mean()  error
+    # df = myFrame.describe()
+    # df = myFrame.groupby(by=['Date']).sum().groupby(level=[0]).cumsum()
+    # df = df.groupby(by=['Date']).sum().groupby(level=[0]).cumsum()
+    # print(myFrame.info())
+    df = myFrame.groupby(['Date']).mean()
     mydict = {
-        "df": df.to_html()
+        "df": df.to_html(classes='table table-striped')
     }
     return render(request, 'measurements/table.html', context=mydict)       
         
@@ -195,112 +214,123 @@ def showdata(request):
 #         estado = True,
 #     ).latest('created_on')
 
-# def Inicio (request):
-#     # resumen
-#     contagios = "{:,.0f}".format(total_res_wor['Contagiados'][0])
-#     fallecidos = "{:,.0f}".format(total_res_wor['Fallecidos'][0])
-#     vacunados = "{:,.0f}".format(total_res_wor['Vacunados'][0])
-#     fechas = "{}".format(total_res_wor['Fecha'][0])
+def Inicio (request):
+    # resumen
+    
+    Temperature = "{:,.0f}".format(total_res_wor['Temperature'][0])
+    Humidity = "{:,.0f}".format(total_res_wor['Humidity'][0])
+    Pression = "{:,.0f}".format(total_res_wor['Pression'][0])
+    PM25 = "{:,.0f}".format(total_res_wor['PM25'][0])
+    PM10 = "{:,.0f}".format(total_res_wor['PM10'][0])
+    Dates = "{}".format(total_res_wor['vDate'][0])
 
-#     # Contagiados, fallecidos y vacunados
+    #DailyAverage
+    DailyAverage
+    mydict = {
+        "DailyAverage": DailyAverage.to_html(classes='table table-striped')
+    }
+    # # Contagiados, fallecidos y vacunados
 
-#     fecha_contagios = date_cases_deaths['Fecha'].tolist()
-#     total_contagiados = date_cases_deaths['Total contagiados'].tolist()
-#     total_fallecidos = date_cases_deaths['Total fallecidos'].tolist()
-#     total_vacunados = date_cases_deaths['Total vacunados'].tolist()
-
-
-#     # 20 primeros paises
-
-#     ## contagios
-#     pais20contagios = Country_total_cases_deaths.sort_values('Total contagiados',ascending=False).head(20)
-#     N_pais20contagios = pais20contagios['Pais'].tolist()
-#     C_pais20contagios = pais20contagios['Total contagiados'].tolist()
-
-
-#     ## fallecidos
-#     pais20fallecidos = Country_total_cases_deaths.sort_values('Total fallecidos',ascending=False).head(20)
-#     N_pais20fallecidos = pais20fallecidos['Pais'].tolist()
-#     C_pais20fallecidos = pais20fallecidos['Total fallecidos'].tolist()
-
-#     ## vacunados
-#     pais20vacunados = Country_total_cases_deaths.sort_values('Total vacunados',ascending=False).head(20)
-#     N_pais20vacunados = pais20vacunados['Pais'].tolist()
-#     C_pais20vacunados = pais20vacunados['Total vacunados'].tolist()
+    # fecha_contagios = date_cases_deaths['Fecha'].tolist()
+    # total_contagiados = date_cases_deaths['Total contagiados'].tolist()
+    # total_fallecidos = date_cases_deaths['Total fallecidos'].tolist()
+    # total_vacunados = date_cases_deaths['Total vacunados'].tolist()
 
 
-#     # Continente
+    # # 20 primeros paises
 
-#     continentes = Continent_total_cases_deaths.groupby(['Continente']).sum().reset_index()
-#     contientesNombre = continentes['Continente'].tolist()
-#     continentesContagios = continentes['Total contagiados'].tolist()
-#     continentesFallecidos = continentes['Total fallecidos'].tolist()
-#     continentesVacunados = continentes['Total vacunados'].tolist()
+    # ## contagios
+    # pais20contagios = Country_total_cases_deaths.sort_values('Total contagiados',ascending=False).head(20)
+    # N_pais20contagios = pais20contagios['Pais'].tolist()
+    # C_pais20contagios = pais20contagios['Total contagiados'].tolist()
 
 
-#     # Table
+    # ## fallecidos
+    # pais20fallecidos = Country_total_cases_deaths.sort_values('Total fallecidos',ascending=False).head(20)
+    # N_pais20fallecidos = pais20fallecidos['Pais'].tolist()
+    # C_pais20fallecidos = pais20fallecidos['Total fallecidos'].tolist()
+
+    # ## vacunados
+    # pais20vacunados = Country_total_cases_deaths.sort_values('Total vacunados',ascending=False).head(20)
+    # N_pais20vacunados = pais20vacunados['Pais'].tolist()
+    # C_pais20vacunados = pais20vacunados['Total vacunados'].tolist()
+
+
+    # # Continente
+
+    # continentes = Continent_total_cases_deaths.groupby(['Continente']).sum().reset_index()
+    # contientesNombre = continentes['Continente'].tolist()
+    # continentesContagios = continentes['Total contagiados'].tolist()
+    # continentesFallecidos = continentes['Total fallecidos'].tolist()
+    # continentesVacunados = continentes['Total vacunados'].tolist()
+
+
+    # # Table
 
     
-#     json_records = table1.reset_index().to_json(orient ='records')
-#     data = []
-#     data = json.loads(json_records)
+    # json_records = table1.reset_index().to_json(orient ='records')
+    # data = []
+    # data = json.loads(json_records)
 
-#     # map
+    # # map
 
-#     map_final_contagiados = map_cases_deaths.to_numpy().tolist()
-#     map_final_fallecidos = map_final_deaths.to_numpy().tolist()
-#     map_final_vacunados = map_final_vaccins.to_numpy().tolist()
+    # map_final_contagiados = map_cases_deaths.to_numpy().tolist()
+    # map_final_fallecidos = map_final_deaths.to_numpy().tolist()
+    # map_final_vacunados = map_final_vaccins.to_numpy().tolist()
     
-#     context = {
+    context = {
 
-#         # resumen
-#         'contagio': contagios,
-#         'fallecido': fallecidos,
-#         'vacunado': vacunados,
-#         'fecha': fechas,
-        
+        # resumen
+        'Temperature': Temperature,
+        'Humidity': Humidity,
+        'Pression': Pression,
+        'PM25': PM25,
+        'PM10' : PM10,
+        'fecha': Dates,
 
-#         # No por fecha
-#         'fecha_contagios':fecha_contagios,
-#         'total_contagiados':total_contagiados,
-#         'total_fallecidos':total_fallecidos,
-#         'total_vacunados':total_vacunados,
-
-
-#         # 20 primeros
-
-#         ## 20 contagios
-#         'N_pais20contagios': N_pais20contagios,
-#         'C_pais20contagios': C_pais20contagios,
-
-#         ## 20 fallecidos
-#         'N_pais20fallecidos': N_pais20fallecidos,
-#         'C_pais20fallecidos': C_pais20fallecidos,
-
-#         ## 20 vacunados
-#         'N_pais20vacunados': N_pais20vacunados,
-#         'C_pais20vacunados': C_pais20vacunados,
+        "DailyAverage": DailyAverage.to_html(classes='table table-striped')
+    
+        # # No por fecha
+        # 'fecha_contagios':fecha_contagios,
+        # 'total_contagiados':total_contagiados,
+        # 'total_fallecidos':total_fallecidos,
+        # 'total_vacunados':total_vacunados,
 
 
-#         # Contiente
-#         'contientesNombre':contientesNombre,
-#         'continentesContagios': continentesContagios,
-#         'continentesFallecidos': continentesFallecidos,
-#         'continentesVacunados':continentesVacunados,
+        # # 20 primeros
+
+        # ## 20 contagios
+        # 'N_pais20contagios': N_pais20contagios,
+        # 'C_pais20contagios': C_pais20contagios,
+
+        # ## 20 fallecidos
+        # 'N_pais20fallecidos': N_pais20fallecidos,
+        # 'C_pais20fallecidos': C_pais20fallecidos,
+
+        # ## 20 vacunados
+        # 'N_pais20vacunados': N_pais20vacunados,
+        # 'C_pais20vacunados': C_pais20vacunados,
 
 
-#         # tabla
-#         'd': data, 
+        # # Contiente
+        # 'contientesNombre':contientesNombre,
+        # 'continentesContagios': continentesContagios,
+        # 'continentesFallecidos': continentesFallecidos,
+        # 'continentesVacunados':continentesVacunados,
 
-#         # map
-#         'map_final_contagiados':map_final_contagiados,
-#         'map_final_fallecidos':map_final_fallecidos,
-#         'map_final_vacunados':map_final_vacunados,
 
-#         # Redes
-#         'sociales':getData(),
-#         'Sensor':getSensor(),
+        # # tabla
+        # 'd': data, 
 
-#     }
+        # # map
+        # 'map_final_contagiados':map_final_contagiados,
+        # 'map_final_fallecidos':map_final_fallecidos,
+        # 'map_final_vacunados':map_final_vacunados,
 
-#     return render(request,'index.html',context)
+        # # Redes
+        # 'sociales':getData(),
+        # 'Sensor':getSensor(),
+
+    }
+
+    return render(request,'measurements/graphs.html',context)

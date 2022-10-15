@@ -6,14 +6,11 @@
 <div class="wrapper">
     <header class="header">Today measures</header>
     <article class="main">
-        {{df|safe}}
+        <div clase="Table">
+            {{df|safe}}
+        </div>
     </article>
-    <aside class="aside aside-1">
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium laboriosam obcaecati itaque rem ad
-            amet nisi minus odit impedit nemo repellat, in consectetur, nulla dolor dicta. Quas voluptas id nemo?
-        </p>
 
-    </aside>
     <aside class="aside aside-2">
 
         <label for="">Periodicity<select id="txtStatus" type="number" class="form-select">
@@ -28,5 +25,7 @@
     </aside>
     <footer class="footer">Today is a great day to go for a walk</footer>
 </div>
+
+
 
 {% endblock content %}

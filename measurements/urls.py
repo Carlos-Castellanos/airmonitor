@@ -10,6 +10,7 @@ from .views import(
     native_import_csv,
     simple_upload,
     showdata,
+    Inicio,
 )
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView
@@ -27,6 +28,7 @@ urlpatterns = [
     path('import/', sensor_import_csv, name="measurements_import"),
     path('<native_import/', native_import_csv, name="native_import"),
     path('upload/',simple_upload, name='file_upload'),
-    path('showdata/',showdata, name='measurements_showdata')
+    path('showdata/',showdata, name='measurements_showdata'),
+    path('showgraphs/',Inicio, name='measurements_graphs')
 
 ]

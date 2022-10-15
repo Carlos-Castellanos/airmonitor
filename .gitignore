@@ -3,3 +3,7 @@ venv/*
 staticfiles
 mc?.md
 *.zip
+index.csv
+dataxxx.py
+dataxxx.csv
+*.zip
