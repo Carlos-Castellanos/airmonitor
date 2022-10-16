@@ -27,7 +27,7 @@ urlpatterns = [
     path('', include('pages.urls')),                   
     path('sensors/',include('sensors.urls')),  
     path('measurements/',include('measurements.urls')), 
-    path('core/',include('core.urls')), 
+
 
            
   

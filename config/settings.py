@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'sensors',
     'measurements',
     'accounts',
-    'core'
+
 
 ]
 

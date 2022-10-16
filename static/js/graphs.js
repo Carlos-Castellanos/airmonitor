@@ -1,28 +1,28 @@
 // var fechas = {{ fecha_contagios| safe}};
-// var contagiados = {{ total_contagiados| safe}};
+//var Temperature = {{ Temperature| safe}};
 // var fallecidos = {{ total_fallecidos| safe}};
 // var vacunados = {{ total_vacunados| safe}};
 
-// let miCanvas = document.getElementById('myChart').getContext("2d");
+let miCanvas = document.getElementById('myChart').getContext("2d");
 
 
-// var chart = new Chart(miCanvas, {
-//     type: "line",
-//     data: {
-//         labels: fechas,
-//         datasets: [{
-//             data: contagiados,
-//             label: 'Contagiados',
-//             barThickness: 'flex',
-//             backgroundColor: '#03a9fc',
-//         },
-//         ]
-//     },
-//     options: {
-//         responsive: true,
-//         maintainAspectRatio: false,
-//     }
-// })
+var chart = new Chart(miCanvas, {
+    type: "line",
+    data: {
+        labels: fechas,
+        datasets: [{
+            data: Temperature,
+            label: 'Temperature',
+            barThickness: 'flex',
+            backgroundColor: '#03a9fc',
+        },
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+    }
+})
 
 // var fechas;
 // var estado;

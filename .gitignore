@@ -4,6 +4,6 @@ staticfiles
 mc?.md
 *.zip
 index.csv
-dataxxx.py
+dataXXX.py
 dataxxx.csv
 *.zip

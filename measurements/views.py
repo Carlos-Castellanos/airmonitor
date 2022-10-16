@@ -11,6 +11,7 @@ from .data import *
 import pandas as pd
 import json
 
+
 #import file
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -200,6 +201,7 @@ def showdata(request):
     mydict = {
         "df": df.to_html(classes='table table-striped')
     }
+
     return render(request, 'measurements/table.html', context=mydict)       
         
 # graphs
@@ -225,8 +227,7 @@ def Inicio (request):
     Dates = "{}".format(total_res_wor['vDate'][0])
 
     #DailyAverage
-    DailyAverage
-    mydict = {
+    Grafica = {
         "DailyAverage": DailyAverage.to_html(classes='table table-striped')
     }
     # # Contagiados, fallecidos y vacunados
