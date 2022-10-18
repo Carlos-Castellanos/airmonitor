@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'sensors',
     'measurements',
     'accounts',
-
-
+    'rangefilter',
+    'import_export',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

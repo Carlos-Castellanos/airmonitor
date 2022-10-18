@@ -8,57 +8,54 @@
 }
 
 /* Nav */
-.nombre-logo{
-    color:#272727;
+.nombre-logo {
+    color: #272727;
 }
 
-.color-social{
-    color:#272727;
-}
 
-.titulo{
+.titulo {
     text-align: center;
     padding: 3rem
 }
 
 /* Resumen */
 
-.resumen-forma{
+.resumen-forma {
 
     margin: 10px auto;
     padding: 10px .3em;
-    height: 130px;
-    width: 260px;
+    height: 65px;
+    width: 130px;
 
     border-radius: 10px;
     text-align: center;
-    justify-content:center;
-    background-color: #e9edc9;
+    justify-content: center;
+    background-color: #626834;
 
 }
 
-.titulo-forma{
-    font-size: 170%;
+.titulo-forma {
+    font-size: 100%;
     padding: 10px .3em;
 }
 
-.titulo-resultado{
-    font-size: 130%
+.titulo-resultado {
+    font-size: 100%
 }
 
 /* Dasboard */
 
-.selector_container{
+.selector_container {
     margin: 10px auto;
     padding: 10px auto;
     text-align: center;
     align-items: center;
     border-radius: 10px;
-    background-color: #ccd5ae;
+    background-color: #626834;
 
 }
 
-.selector{
+.selector {
     text-align: center;
     align-items: center;
 }
@@ -72,36 +69,36 @@ select {
     width: 250px;
     text-align: center;
     align-items: center;
- }
+}
 
 
-.boton_container{
+.boton_container {
     padding: 10px .1em;
     text-align: center;
     align-items: center;
 }
 
-.boton{
+.boton {
     margin: 30px auto;
     padding: 30px .1em;
 }
 
-.part1{
+.part1 {
     margin: 5px auto;
     padding: 5px auto;
     text-align: center;
     align-items: center;
     height: 600px;
     border-radius: 10px;
-    background-color: #e9edc9;
+    background-color: #626834;
 }
 
-.titulo_graph{
+.titulo_graph {
     font-size: 100%;
     padding: 30px .1em;
 }
 
-.graph{
+.graph {
     width: 100%;
     height: 72%;
     text-align: center;
@@ -110,7 +107,7 @@ select {
 
 /* table */
 
-.table_data{
+.table_data {
     font-size: 55%;
     width: 100%;
     height: 90%;
@@ -119,7 +116,7 @@ select {
 
 /* button center */
 
-.center-button-div{
+.center-button-div {
     margin: 10px auto;
     padding: 10px auto;
     text-align: center;
@@ -128,7 +125,7 @@ select {
     text-align: center;
 }
 
-.center-button{
+.center-button {
     align-items: center;
     text-align: center;
     margin: 5px auto;
@@ -137,31 +134,31 @@ select {
 
 /* Footer */
 
-.footer_part1{
-    background-color:#ccd5ae;
+.footer_part1 {
+    background-color: #ccd5ae;
 }
 
-.footer_part2{
+.footer_part2 {
     margin: 10px;
     padding: 50px .5em;
-    justify-content:center;
+    justify-content: center;
 }
 
-.titulo-footer{
+.titulo-footer {
     font-size: 190%;
     padding: 30px .1em;
 }
 
-.grid_tool{
+.grid_tool {
     align-items: center;
     text-align: center;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 100px;
     grid-gap: 10px;
-  }
+}
 
-.pDesing{
+.pDesing {
     padding: 20px .5em;
     text-align: center;
     align-items: center;

@@ -1,90 +1,20 @@
 #import csv
 import csv
 from distutils.command.upload import upload
-from urllib import request
+#from urllib import request
 from django.http import HttpRequest, HttpResponse
 from import_export import resources
 from .models import Measurements
-
 #import daas
 from .data import *
 import pandas as pd
 import json
-
-
 #import file
-from django.conf import settings
+#from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import( 
-    CreateView, 
-    # DeleteView,
-    # UpdateView
-)
-
-from django.contrib.auth.mixins import (
-    LoginRequiredMixin, 
-    UserPassesTestMixin
-   )   #113
-
-from django.shortcuts import  redirect, get_object_or_404
-
-from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
-
-
-# https://docs.djangoproject.com/en/4.1/ref/class-based-views/flattened-index/
-from django.urls import reverse_lazy
+from django.shortcuts import  render, redirect, get_object_or_404
+#from django.urls import reverse_lazy
 from .models import Measurements
-
-# Create your views here.
-
-class MeasurementsListView(ListView):
-    template_name = "measurements/list.html"   
-    model = Measurements
-
-
-# class measurementsDetailView(DetailView):
-#     template_name = "measurements/detail.html"  
-#     model = Measurements
-
-class MeasurementsCreateView(LoginRequiredMixin, CreateView): #113
-    template_name = "measurements/new.html"  
-    model = Measurements
-    fields = ["measurementDate","Latitude","Longitude","Temperature","Humidity","Pression","PM25","PM10","sensor"]  
-
-    def form_valid(self, form):       #take tha user and save it like measurements'field
-        form.instance.Measurements = self.request.user
-        return super().form_valid(form)
-
-# class measurementsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): #113
-#     template_name = "measurements/edit.html"  
-#     model = Measurements
-#     fields = ["title","subtitle","body","image"]  
-
-#     def test_func(self):                                #113
-#         obj = self.get_object()
-#         return obj.measurements == self.request.user
-
-
-# class measurementsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):  #113
-#     template_name = "measurements/delete.html"  
-#     model = Measurements
-#     success_url = reverse_lazy('measurements_list')
-
-#     def test_func(self):                                #113
-#         obj = self.get_object()
-#         return obj.measurements == self.request.user
-
-
-# from utils import my_cool_func 
-# def view_coolness(request): 
-#     measurements = my_cool_func(request) 
-#     return render_to_response("xxx.html")
-
 
 # csv import - export
 #name,measurementDate,measurementTime,Latitude,Longitude,Temperature,Humidity,Pression,PM25,PM10
@@ -95,8 +25,6 @@ def sensor_export_csv(request):
     response = HttpResponse(dataset.xls, content_type='text/xls')
     response['Content-Disposition'] = 'atachment; filename="measurements_library.xls"'
     return response
-
-
 
 def sensor_import_csv(request):
     # Import-Export library
@@ -110,8 +38,7 @@ def sensor_import_csv(request):
         return HttpResponse(
             "Successfully imported"
         )
-        
-        
+      
 #def native_import_csv(request):
 def native_import_csv(myfile):
     # Native Import CSV
@@ -171,7 +98,7 @@ def simple_upload(request):
         })
     return render(request, 'measurements/upload.html')
         
-#panda
+# Tresting table (table.html)
 def showdata(request):
     # ['name','measurementDate','measurementTime','Latitude','Longitude','Temperature','Humidity','Pression','PM25','PM10']
     item = Measurements.objects.all().values()
@@ -204,17 +131,6 @@ def showdata(request):
 
     return render(request, 'measurements/table.html', context=mydict)       
         
-# graphs
-
-# def getData():
-#     return Measurements.objects.filter(
-#         estado = True,
-#     ).latest('measurementDate')
-
-# def getSensor():
-#     return Sensor.objects.filter(
-#         estado = True,
-#     ).latest('created_on')
 
 def Inicio (request):
     # resumen
@@ -230,57 +146,14 @@ def Inicio (request):
     Grafica = {
         "DailyAverage": DailyAverage.to_html(classes='table table-striped')
     }
-    # # Contagiados, fallecidos y vacunados
+    # # Temperatura, humedad, presion pm25 y pm10
 
-    # fecha_contagios = date_cases_deaths['Fecha'].tolist()
-    # total_contagiados = date_cases_deaths['Total contagiados'].tolist()
-    # total_fallecidos = date_cases_deaths['Total fallecidos'].tolist()
-    # total_vacunados = date_cases_deaths['Total vacunados'].tolist()
+    fecha_mediciones = Global['MDate'].tolist()
+    total_temperatura = Global['Temp'].tolist()
+    total_humedad = Global['Hum'].tolist()
+    total_presion = Global['Pres'].tolist()
 
-
-    # # 20 primeros paises
-
-    # ## contagios
-    # pais20contagios = Country_total_cases_deaths.sort_values('Total contagiados',ascending=False).head(20)
-    # N_pais20contagios = pais20contagios['Pais'].tolist()
-    # C_pais20contagios = pais20contagios['Total contagiados'].tolist()
-
-
-    # ## fallecidos
-    # pais20fallecidos = Country_total_cases_deaths.sort_values('Total fallecidos',ascending=False).head(20)
-    # N_pais20fallecidos = pais20fallecidos['Pais'].tolist()
-    # C_pais20fallecidos = pais20fallecidos['Total fallecidos'].tolist()
-
-    # ## vacunados
-    # pais20vacunados = Country_total_cases_deaths.sort_values('Total vacunados',ascending=False).head(20)
-    # N_pais20vacunados = pais20vacunados['Pais'].tolist()
-    # C_pais20vacunados = pais20vacunados['Total vacunados'].tolist()
-
-
-    # # Continente
-
-    # continentes = Continent_total_cases_deaths.groupby(['Continente']).sum().reset_index()
-    # contientesNombre = continentes['Continente'].tolist()
-    # continentesContagios = continentes['Total contagiados'].tolist()
-    # continentesFallecidos = continentes['Total fallecidos'].tolist()
-    # continentesVacunados = continentes['Total vacunados'].tolist()
-
-
-    # # Table
-
-    
-    # json_records = table1.reset_index().to_json(orient ='records')
-    # data = []
-    # data = json.loads(json_records)
-
-    # # map
-
-    # map_final_contagiados = map_cases_deaths.to_numpy().tolist()
-    # map_final_fallecidos = map_final_deaths.to_numpy().tolist()
-    # map_final_vacunados = map_final_vaccins.to_numpy().tolist()
-    
     context = {
-
         # resumen
         'Temperature': Temperature,
         'Humidity': Humidity,
@@ -288,50 +161,35 @@ def Inicio (request):
         'PM25': PM25,
         'PM10' : PM10,
         'fecha': Dates,
-
-        "DailyAverage": DailyAverage.to_html(classes='table table-striped')
-    
-        # # No por fecha
-        # 'fecha_contagios':fecha_contagios,
-        # 'total_contagiados':total_contagiados,
-        # 'total_fallecidos':total_fallecidos,
-        # 'total_vacunados':total_vacunados,
-
-
-        # # 20 primeros
-
-        # ## 20 contagios
-        # 'N_pais20contagios': N_pais20contagios,
-        # 'C_pais20contagios': C_pais20contagios,
-
-        # ## 20 fallecidos
-        # 'N_pais20fallecidos': N_pais20fallecidos,
-        # 'C_pais20fallecidos': C_pais20fallecidos,
-
-        # ## 20 vacunados
-        # 'N_pais20vacunados': N_pais20vacunados,
-        # 'C_pais20vacunados': C_pais20vacunados,
-
-
-        # # Contiente
-        # 'contientesNombre':contientesNombre,
-        # 'continentesContagios': continentesContagios,
-        # 'continentesFallecidos': continentesFallecidos,
-        # 'continentesVacunados':continentesVacunados,
-
-
-        # # tabla
-        # 'd': data, 
-
-        # # map
-        # 'map_final_contagiados':map_final_contagiados,
-        # 'map_final_fallecidos':map_final_fallecidos,
-        # 'map_final_vacunados':map_final_vacunados,
-
-        # # Redes
-        # 'sociales':getData(),
-        # 'Sensor':getSensor(),
-
+        # Table
+        "DailyAverage": DailyAverage.to_html(classes='table table-striped'),
+        # Graph
+        'fecha_mediciones'  : fecha_mediciones,
+        'total_temperatura' : total_temperatura,
+        'total_humedad' : total_humedad,
+        'total_presion' : total_presion,
     }
 
     return render(request,'measurements/graphs.html',context)
+
+    
+def barras(request):
+    products = Measurements.objects.all()
+#     if request.method == 'POST':
+#         form = ProductForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('index')
+#     else:
+#         form = ProductForm()        
+    context = {
+        "products": products,
+        # "form": form
+    }
+    return render(request, 'measurements/barras.html', context)
+
+# data: [{% for product in products %}  {{ product.num_of_products }},  {% endfor %}],
+
+
+
+

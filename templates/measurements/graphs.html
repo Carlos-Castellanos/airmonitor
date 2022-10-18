@@ -3,92 +3,77 @@
 {% block title %}Graphs{% endblock title %}
 {% block content %}
 
+
 <div class="wrapper">
     <header class="header">Today measures</header>
-    <article class="main">
-        {{df|safe}}
+
+
+
+    <aside class="aside aside-1">
+        <div class="container">
+            <div class="row">
+                <div class="resumen-forma">
+                    <h2 class="titulo-forma">Temperature</h2>
+                    <h3 class="titulo-resultado">{{Temperature}} °C</h3>
+                </div>
+                <div class="resumen-forma">
+                    <h2 class="titulo-forma">Humidity</h2>
+                    <h3 class="titulo-resultado">{{Humidity}} %</h3>
+                </div>
+                <div class="resumen-forma">
+                    <h2 class="titulo-forma">Pression</h2>
+                    <h3 class="titulo-resultado">{{Pression}} kPa</h3>
+                </div>
+                <div class="resumen-forma">
+                    <h2 class="titulo-forma">PM25</h2>
+                    <h3 class="titulo-resultado">{{PM25}} µg/m3</h3>
+                </div>
+                <div class="resumen-forma">
+                    <h2 class="titulo-forma">PM10</h2>
+                    <h3 class="titulo-resultado">{{PM10}} µg/m3</h3>
+                </div>
+                <div class="resumen-forma">
+                    <h2 class="titulo-forma">Report date</h2>
+                    <h3 class="titulo-resultado">{{fecha}} </h3>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <article>
+        <div class="container">
+            <!-- selector -->
+            <div class="row">
+                <!-- Total contagios por fecha -->
+                <div class="col-10 col-sm-5 col-md-5 part1">
+                    <div>
+                        <h3 class="titulo_graph" id="Total_fecha">Graph</h3>
+                    </div>
+                    <div class="graph">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </article>
 
     <aside class="aside aside-2">
-
-        <label for="">Periodicity<select id="txtStatus" type="number" class="form-select">
-                <option selectd hidden value="-1">-Select the periodicity-</option>
-                <option value="0">Diary</option>
-                <option value="1">Weekly</option>
-                <option value="3">Monthly</option>
-                <option value="6">Completed</option>
-                <option value="9">Yearly</option>
-            </select>
-        </label>
+        <div class="col-10 col-sm-5 col-md-5 part1">
+            {{DailyAverage|safe}}
+        </div>
     </aside>
+
     <footer class="footer">Today is a great day to go for a walk</footer>
 </div>
-<!-- Promedios de valores -->
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="resumen-forma">
-                <h2 class="titulo-forma">Temperature</h2>
-                <h3 class="titulo-resultado">No. {{Temperature}}</h3>
-            </div>
-            <div class="resumen-forma">
-                <h2 class="titulo-forma">Humidity</h2>
-                <h3 class="titulo-resultado">No. {{Humidity}}</h3>
-            </div>
-            <div class="resumen-forma">
-                <h2 class="titulo-forma">Pression</h2>
-                <h3 class="titulo-resultado">No. {{Pression}}</h3>
-            </div>
-            <div class="resumen-forma">
-                <h2 class="titulo-forma">PM25</h2>
-                <h3 class="titulo-resultado">{{PM25}} </h3>
-            </div>
-            <div class="resumen-forma">
-                <h2 class="titulo-forma">PM10</h2>
-                <h3 class="titulo-resultado">{{PM10}} </h3>
-            </div>
-            <div class="resumen-forma">
-                <h2 class="titulo-forma">Report date</h2>
-                <h3 class="titulo-resultado">{{fecha}} </h3>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section>
-    <div class="container">
-        <!-- selector -->
-        <div class="row">
-            <!-- Total contagios por fecha -->
-            <div class="col-10 col-sm-5 col-md-5 part1">
-                <div>
-                    <h3 class="titulo_graph" id="Total_fecha">Graph</h3>
-                </div>
-                <div class="graph">
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-            <div class="col-10 col-sm-5 col-md-5 part1">
-                {{DailyAverage|safe}}
-            </div>
 
-            <!-- Mapa -->
-
-            <!-- 20 primeros-->
-
-            <!-- Continente -->
-
-            <!-- Tabla -->
-
-        </div>
-    </div>
-</section>
 {% endblock content %}
 
 {% block script %}
 <!-- Chart js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script scr="/static/js/graphs.js"></script>
+<script src="/static/js/multiple.js"></script>
 <!-- Google charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
