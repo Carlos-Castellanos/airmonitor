@@ -9,60 +9,56 @@
 
 
 
-    <aside class="aside aside-1">
-        <div class="container">
-            <div class="row">
-                <div class="resumen-forma">
-                    <h2 class="titulo-forma">Temperature</h2>
-                    <h3 class="titulo-resultado">{{Temperature}} °C</h3>
-                </div>
-                <div class="resumen-forma">
-                    <h2 class="titulo-forma">Humidity</h2>
-                    <h3 class="titulo-resultado">{{Humidity}} %</h3>
-                </div>
-                <div class="resumen-forma">
-                    <h2 class="titulo-forma">Pression</h2>
-                    <h3 class="titulo-resultado">{{Pression}} kPa</h3>
-                </div>
-                <div class="resumen-forma">
-                    <h2 class="titulo-forma">PM25</h2>
-                    <h3 class="titulo-resultado">{{PM25}} µg/m3</h3>
-                </div>
-                <div class="resumen-forma">
-                    <h2 class="titulo-forma">PM10</h2>
-                    <h3 class="titulo-resultado">{{PM10}} µg/m3</h3>
-                </div>
-                <div class="resumen-forma">
-                    <h2 class="titulo-forma">Report date</h2>
-                    <h3 class="titulo-resultado">{{fecha}} </h3>
-                </div>
+    <div class="row">
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">Temperature</h2>
+            <h3 class="titulo-resultado">{{Temperature}} °C</h3>
+        </div>
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">Humidity</h2>
+            <h3 class="titulo-resultado">{{Humidity}} %</h3>
+        </div>
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">Pression</h2>
+            <h3 class="titulo-resultado">{{Pression}} kPa</h3>
+        </div>
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">PM25</h2>
+            <h3 class="titulo-resultado">{{PM25}} µg/m3</h3>
+        </div>
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">PM10</h2>
+            <h3 class="titulo-resultado">{{PM10}} µg/m3</h3>
+        </div>
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">Report date</h2>
+            <h3 class="titulo-resultado">{{fecha}} </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- General graph Tem, Hum, Pres, P2.5 and pm10 -->
+        <div class="col-10 col-sm-5 col-md-10 part1">
+            <div>
+                <h3 class="titulo_graph" id="GeneralGraph">Graph</h3>
+            </div>
+            <div class="graph">
+                <canvas id="myChart"></canvas>
             </div>
         </div>
-    </aside>
 
-    <article>
-        <div class="container">
-            <!-- selector -->
-            <div class="row">
-                <!-- Total contagios por fecha -->
-                <div class="col-10 col-sm-5 col-md-5 part1">
-                    <div>
-                        <h3 class="titulo_graph" id="Total_fecha">Graph</h3>
-                    </div>
-                    <div class="graph">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                </div>
+    </div>
 
-            </div>
-        </div>
-    </article>
 
-    <aside class="aside aside-2">
+
+    <!-- <aside class="aside aside-2">
         <div class="col-10 col-sm-5 col-md-5 part1">
-            {{DailyAverage|safe}}
+            <div class="table_data">
+                {{DailyAverage|safe}}
+            </div>
+
         </div>
-    </aside>
+    </aside> -->
 
     <footer class="footer">Today is a great day to go for a walk</footer>
 </div>
@@ -73,6 +69,16 @@
 {% block script %}
 <!-- Chart js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+    const totaltemperatura = {{ total_temperatura }}
+    const totalhumedad = {{ total_humedad }}
+    const totalpresion = {{ total_presion }}
+    const totalpm25 = {{ total_pm25 }}
+    const totalpm10 = {{ total_pm10 }}
+    // const fechamediciones = {{ fecha_mediciones }}
+
+</script>
 <script src="/static/js/multiple.js"></script>
 <!-- Google charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

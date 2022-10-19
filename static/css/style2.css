@@ -23,7 +23,7 @@
 .resumen-forma {
 
     margin: 10px auto;
-    padding: 10px .3em;
+    padding: 5px .3em;
     height: 65px;
     width: 130px;
 
@@ -36,7 +36,7 @@
 
 .titulo-forma {
     font-size: 100%;
-    padding: 10px .3em;
+    padding: 5px .3em;
 }
 
 .titulo-resultado {
@@ -90,7 +90,7 @@ select {
     align-items: center;
     height: 600px;
     border-radius: 10px;
-    background-color: #626834;
+    background-color: #e0e4be;
 }
 
 .titulo_graph {

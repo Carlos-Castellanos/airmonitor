@@ -141,6 +141,8 @@ def Inicio (request):
     PM25 = "{:,.0f}".format(total_res_wor['PM25'][0])
     PM10 = "{:,.0f}".format(total_res_wor['PM10'][0])
     Dates = "{}".format(total_res_wor['vDate'][0])
+    
+
 
     #DailyAverage
     Grafica = {
@@ -148,10 +150,16 @@ def Inicio (request):
     }
     # # Temperatura, humedad, presion pm25 y pm10
 
-    fecha_mediciones = Global['MDate'].tolist()
+
     total_temperatura = Global['Temp'].tolist()
     total_humedad = Global['Hum'].tolist()
     total_presion = Global['Pres'].tolist()
+    total_pm25 = Global['PM25'].tolist()
+    total_pm10 = Global['PM10'].tolist()
+    
+    #fecha_mediciones = Global['MDate'].tolist()  
+    fecha_mediciones = ["aa", "bb", "cc", "dd", "ee", "ff"]
+
 
     context = {
         # resumen
@@ -161,13 +169,20 @@ def Inicio (request):
         'PM25': PM25,
         'PM10' : PM10,
         'fecha': Dates,
-        # Table
-        "DailyAverage": DailyAverage.to_html(classes='table table-striped'),
+  
         # Graph
-        'fecha_mediciones'  : fecha_mediciones,
+
         'total_temperatura' : total_temperatura,
         'total_humedad' : total_humedad,
         'total_presion' : total_presion,
+        'total_pm25' : total_pm25, 
+        'total_pm10' : total_pm10,               
+        'fecha_mediciones' : fecha_mediciones,
+        
+        
+        
+        # Table
+        "DailyAverage": DailyAverage.to_html(classes='table table-striped'),
     }
 
     return render(request,'measurements/graphs.html',context)
@@ -188,7 +203,11 @@ def barras(request):
     }
     return render(request, 'measurements/barras.html', context)
 
-# data: [{% for product in products %}  {{ product.num_of_products }},  {% endfor %}],
+
+
+
+
+
 
 
 

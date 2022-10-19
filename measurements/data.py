@@ -18,30 +18,13 @@ df['PM25'] = df['PM25'].astype(float, errors = 'raise')
 df['PM10'] = df['PM10'].astype(float, errors = 'raise')
 
 
-
-DF_Sensor = df['Sensor']
-DF_Date = df['MDate']
-DF_Time = df['Time']
-DF_Lat = df['Lat']
-DF_Lon = df['Lon']
-DF_Temp = df['Temp']
-DF_Hum = df['Hum']
-DF_Pres = df['Pres']
-DF_PM25 = df['PM25']
-DF_PM10 = df['PM10']
-
-
-DF_total = pd.concat([DF_Sensor, DF_Date, DF_Time, DF_Lat, DF_Lon, DF_Temp,DF_Hum,DF_Pres,DF_PM25,DF_PM10], axis=1)
-
-DF_total.columns = ['Sensor','Date','Time','Latitude','Longitude','Temperature','Humidity','Pression','PM 2.5','PM 10']
-
-
 # ##################################
-# #### Tabla resumen
-
-vDate = "2022-01-01"
+# #### Globla data
+vDate = "2022-10-18"
 Global = df[df["MDate"] == vDate]
 
+# ##################################
+# #### Average date from Global dataframe
 Temperature = Global['Temp'].mean() 
 Humidity = Global['Hum'].mean()
 Pression = Global['Pres'].mean()
@@ -53,13 +36,9 @@ total_res_wor.fillna(0, inplace=True)
 
 # ##################################
 # Graphs dairy averange
+Global = Global.head(40)
 
-DailyAverage = df.groupby(['MDate']).mean()
+# ##################################
+# Table
 
-Global = Global.head(6)
-GlobalTemp = Global['Temp']
-GlobalHum = Global['Hum']
-GlobalPress = Global['Pres']
-GlobalPM25 = Global['PM25']
-GlobalPM10 = Global['PM10']
-
+DailyAverage = Global

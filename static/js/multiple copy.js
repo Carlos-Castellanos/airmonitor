@@ -1,12 +1,9 @@
-const labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+const labels = ["Enero", "febrero", "Marzo", "Abril", "Mayo", "Junio"];
 
-console.log({ totaltemperatura })
-console.log(labels)
-
-
+let fechs = fechamediciones;
 let temp = totaltemperatura;
 let hum = totalhumedad;
-let pres = totalpresion;
+let pres = totalpresio;
 let pm25 = totalpm25;
 let pm10 = totalpm10;
 
@@ -31,34 +28,34 @@ let myChart = new Chart(ctx, {
             backgroundColor: 'rgba(3, 24, 252, 0.2)',
             borderWidth: 1,
             hidden: false,
-            yAxisID: 'y',
+            yAxisID: 'y1',
         },
         {
             label: 'Pression',
             data: pres,
-            borderColor: 'rgba(147, 47, 214)',
-            backgroundColor: 'rgba(147, 47, 214, 0.2)',
+            borderColor: 'rgba(94, 214, 47)',
+            backgroundColor: 'rgba(94, 214, 47, 0.2)',
             borderWidth: 1,
             hidden: false,
-            yAxisID: 'y',
+            yAxisID: 'y2',
         },
         {
             label: 'PM 2.5',
             data: pm25,
-            borderColor: 'rgba(47, 214, 208)',
-            backgroundColor: 'rgba(47, 214, 208, 0.2)',
+            borderColor: 'rgba(47, 214, 169)',
+            backgroundColor: 'rgba(47, 214, 169, 0.2)',
             borderWidth: 1,
             hidden: false,
-            yAxisID: 'y',
+            yAxisID: 'y3',
         },
         {
             label: 'PM 10',
             data: pm10,
-            borderColor: 'rgba(53, 214, 47)',
-            backgroundColor: 'rgba(53, 214, 47, 0.2)',
+            borderColor: 'rgba(147, 47, 214)',
+            backgroundColor: 'rgba(147, 47, 214, 0.2)',
             borderWidth: 1,
             hidden: false,
-            yAxisID: 'y',
+            yAxisID: 'y4',
         },
         ]
     },
@@ -80,8 +77,27 @@ let myChart = new Chart(ctx, {
                 type: 'linear',
                 display: true,
                 position: 'left',
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+            },
+            y2: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+            },
+            y3: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+            },
+            y4: {
+                type: 'linear',
+                display: true,
+                position: 'right',
             }
-
         },
     }
 });
