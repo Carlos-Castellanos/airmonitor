@@ -10,6 +10,8 @@
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/style.css" type="text/css" media="all" title>
     <link rel="stylesheet" href="/static/css/style2.css" type="text/css" media="all" title>
+
+    {% block script0 %}{% endblock script0 %}
     <title>{% block title %}{% endblock title %}</title>
 </head>
 
@@ -25,7 +27,7 @@
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="{%  url 'home' %}" accesskey="H">Home</a>
                     <a class="nav-link" href="{%  url 'measurements_graphs' %}" accesskey="G">Graphs</a>
-                    <a class="nav-link" href="{%  url 'measurements_barras' %}" accesskey="B">Barras</a>
+                    <a class="nav-link" href="{%  url 'measurements_graphs2' %}" accesskey="B">Graphs2</a>
                     <a class="nav-link" href="{%  url 'maps' %}" accesskey="M">Maps</a>
                     <a class="nav-link" href="{%  url 'measurements_showdata' %}" accesskey="T">Tables</a>
                     <li class="nav-item dropdown">
@@ -34,11 +36,8 @@
                             Sensors
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">measurements_import</a>
-                            </li>
                             <li><a class="dropdown-item" href="{% url 'file_upload' %}">file_upload</a>
                             </li>
-                            <li><a class="dropdown-item" href="#">Native import</a></li>
                             <li><a class="dropdown-item" href="{% url 'sensor_list' %}">List Sensors</a></li>
                             <li><a class="dropdown-item" href="{% url 'sensor_new' %}">New Sensor</a></li>
                             <li>

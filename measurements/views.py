@@ -1,9 +1,11 @@
 #import csv
 import csv
 from distutils.command.upload import upload
+from pipes import Template
 #from urllib import request
 from django.http import HttpRequest, HttpResponse
 from import_export import resources
+import numpy as np
 from .models import Measurements
 #import daas
 from .data import *
@@ -11,6 +13,7 @@ import pandas as pd
 import json
 #import file
 #from django.conf import settings
+from django.views.generic import TemplateView
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import  render, redirect, get_object_or_404
 #from django.urls import reverse_lazy
@@ -158,7 +161,11 @@ def Inicio (request):
     total_pm10 = Global['PM10'].tolist()
     
     #fecha_mediciones = Global['MDate'].tolist()  
-    fecha_mediciones = ["aa", "bb", "cc", "dd", "ee", "ff"]
+    #fecha_mediciones = ["aa", "bb", "cc", "dd", "ee", "ff"]
+    fecha_mediciones = [23]
+ 
+   #GlobalDates = Global['MDate'].dt.strftime('%f').tolist()
+    GlobalDates = Global['MDate'].values.astype(np.int64).tolist()
 
 
     context = {
@@ -178,7 +185,7 @@ def Inicio (request):
         'total_pm25' : total_pm25, 
         'total_pm10' : total_pm10,               
         'fecha_mediciones' : fecha_mediciones,
-        
+        'GlobalDates' : GlobalDates,
         
         
         # Table
@@ -202,6 +209,16 @@ def barras(request):
         # "form": form
     }
     return render(request, 'measurements/barras.html', context)
+
+class graphs2(TemplateView):
+    template_name = "measurements/graphsPlus.html"   
+    model =  Measurements
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["qs"]=Measurements.objects.all()
+        return super().get_context_data(**kwargs)
+
 
 
 

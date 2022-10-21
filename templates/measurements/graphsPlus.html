@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
+{% block script0 %}
+<!-- Chart js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="/static/js/graphsPlus.js"></script>
+
+{% endblock script0 %}
 
 {% block title %}Graphs{% endblock title %}
 {% block content %}
-
 
 <div class="wrapper">
     <header class="header">Today measures</header>
@@ -35,7 +41,6 @@
             <h3 class="titulo-resultado">{{fecha}} </h3>
         </div>
     </div>
-    <p>{{GlobalDates}}</p>
 
     <div class="row">
         <!-- General graph Tem, Hum, Pres, P2.5 and pm10 -->
@@ -66,24 +71,3 @@
 
 
 {% endblock content %}
-
-{% block script %}
-<!-- Chart js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-
-    const totaltemperatura = {{ total_temperatura }}
-    const totalhumedad = {{ total_humedad }}
-    const totalpresion = {{ total_presion }}
-    const totalpm25 = {{ total_pm25 }}
-    const totalpm10 = {{ total_pm10 }}
-    // const fechamediciones = {{ fecha_mediciones }}
-    const fechamediciones = {{ GlobalDates }}
-
-</script>
-<script src="/static/js/multiple.js"></script>
-<!-- Google charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-
-{% endblock script %}

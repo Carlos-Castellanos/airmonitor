@@ -3,7 +3,7 @@ const labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "1", "2", "3"
 console.log({ totaltemperatura })
 console.log(labels)
 
-
+let dates = fechamediciones;
 let temp = totaltemperatura;
 let hum = totalhumedad;
 let pres = totalpresion;
@@ -14,7 +14,7 @@ let ctx = document.getElementById("myChart").getContext('2d');
 let myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: labels,
+        labels: dates,
         datasets: [{
             label: 'Temperature',
             data: temp,
