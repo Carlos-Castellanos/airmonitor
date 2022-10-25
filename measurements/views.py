@@ -119,15 +119,19 @@ def showdata(request):
     myFrame['pm10'] = myFrame['pm10'].astype(float, errors = 'raise')
 
     # df = myFrame.head(5)
-    df = myFrame[(myFrame['Sensor'] == '2') & (myFrame['Pres'] > 12.39)]
-    date2 = "2022-01-01"
-    df = myFrame[myFrame['Date'] == date2]
+    #df = myFrame[(myFrame['Sensor'] == '2') & (myFrame['Pres'] > 12.39)]
+    #df = myFrame[myFrame['Date'] == date2]
     # df = myFrame.groupby(by = 'Sensor').mean()  error
-    # df = myFrame.describe()
+
     # df = myFrame.groupby(by=['Date']).sum().groupby(level=[0]).cumsum()
     # df = df.groupby(by=['Date']).sum().groupby(level=[0]).cumsum()
+    # df = myFrame.describe()
     # print(myFrame.info())
-    df = myFrame.groupby(['Date']).mean()
+    #filtrado por fechas
+    date1 = "2021-01-01"
+    date2 = "2021-01-31"
+    df = myFrame.loc[(myFrame['Date'] >= date1) & (myFrame['Date'] <= date2)]
+    df = df.groupby(['Date']).mean()
     mydict = {
         "df": df.to_html(classes='table table-striped')
     }
@@ -145,15 +149,7 @@ def Inicio (request):
     PM10 = "{:,.0f}".format(total_res_wor['PM10'][0])
     Dates = "{}".format(total_res_wor['vDate'][0])
     
-
-
-    #DailyAverage
-    Grafica = {
-        "DailyAverage": DailyAverage.to_html(classes='table table-striped')
-    }
-    # # Temperatura, humedad, presion pm25 y pm10
-
-
+    total_dates = df_Label['Fech'].tolist()
     total_temperatura = Global['Temp'].tolist()
     total_humedad = Global['Hum'].tolist()
     total_presion = Global['Pres'].tolist()
@@ -164,10 +160,11 @@ def Inicio (request):
     #fecha_mediciones = ["aa", "bb", "cc", "dd", "ee", "ff"]
     fecha_mediciones = [23]
  
-   #GlobalDates = Global['MDate'].dt.strftime('%f').tolist()
-    GlobalDates = Global['MDate'].values.astype(np.int64).tolist()
-
-
+    #GlobalDates = Global['MDate'].dt.strftime('%f').tolist()
+    #GlobalDates = Global['MDate'].values.astype(np.int64).tolist()
+  
+   
+    GlobalDates = Global['Temp'].tolist()
     context = {
         # resumen
         'Temperature': Temperature,
@@ -178,7 +175,8 @@ def Inicio (request):
         'fecha': Dates,
   
         # Graph
-
+        'Label_Seconds' : Label_Seconds,
+        'total_dates'  : total_dates,
         'total_temperatura' : total_temperatura,
         'total_humedad' : total_humedad,
         'total_presion' : total_presion,
@@ -189,7 +187,8 @@ def Inicio (request):
         
         
         # Table
-        "DailyAverage": DailyAverage.to_html(classes='table table-striped'),
+        
+        "Global": Global.to_html(classes='table table-striped'),
     }
 
     return render(request,'measurements/graphs.html',context)
@@ -210,14 +209,11 @@ def barras(request):
     }
     return render(request, 'measurements/barras.html', context)
 
-class graphs2(TemplateView):
-    template_name = "measurements/graphsPlus.html"   
-    model =  Measurements
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["qs"]=Measurements.objects.all()
-        return super().get_context_data(**kwargs)
+
+def graphs2 (request):
+    context = { }
+    return render(request,'measurements/graphsPlus.html',context)
 
 
 

@@ -35,7 +35,7 @@
             <h3 class="titulo-resultado">{{fecha}} </h3>
         </div>
     </div>
-    <p>{{GlobalDates}}</p>
+
 
     <div class="row">
         <!-- General graph Tem, Hum, Pres, P2.5 and pm10 -->
@@ -61,17 +61,24 @@
         </div>
     </aside> -->
 
-    <footer class="footer">Today is a great day to go for a walk</footer>
+    <footer class="footer">Table </footer>
 </div>
-
+<p>{{ Label_Seconds }}</p>
+<div class="main">
+    <div clase="Table">
+        {{Global|safe}}
+    </div>
+</div>
 
 {% endblock content %}
 
 {% block script %}
 <!-- Chart js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <script>
-
+    const totaldates = {{ total_dates }}
     const totaltemperatura = {{ total_temperatura }}
     const totalhumedad = {{ total_humedad }}
     const totalpresion = {{ total_presion }}
@@ -79,6 +86,7 @@
     const totalpm10 = {{ total_pm10 }}
     // const fechamediciones = {{ fecha_mediciones }}
     const fechamediciones = {{ GlobalDates }}
+    const LabelSeconds = {{ Label_Seconds }}
 
 </script>
 <script src="/static/js/multiple.js"></script>

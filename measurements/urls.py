@@ -22,5 +22,5 @@ urlpatterns = [
     path('showdata/',showdata, name='measurements_showdata'),
     path('showgraphs/',Inicio, name='measurements_graphs'),
     path('barras/',barras, name='measurements_barras'),
-    path('graphs2/',graphs2.as_view(), name='measurements_graphs2')
+    path('graphs2/',graphs2, name='measurements_graphs2')
 ]

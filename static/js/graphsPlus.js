@@ -1,35 +1,28 @@
 const ctx = document.getElementById('myChart').getContext('2d');
+const dates = ['2021-11-01', '2021-11-02', '2021-11-03', '2021-11-04', '2021-11-05', '2021-11-06', '2021-11-07'];
+console.log('2021-11-01');
+const datapoints = [12, 19, 3, 5, 2, 3, 6];
 const myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
         //            labels: [{% for item in qs %} '{{item.measurementDate}}', {% endfor %}],
-        labels: [12, 19, 3, 5, 2, 3],
+        labels: dates,
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+            data: [12, 19, 3, 5, 2, 3, 6],
+            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+            borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1
         }]
     },
+
     options: {
         scales: {
-            y: {
-                beginAtZero: true
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'day'
+                }
             }
         }
     }

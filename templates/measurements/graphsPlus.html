@@ -1,73 +1,38 @@
 {% extends 'base.html' %}
-{% block script0 %}
-<!-- Chart js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script src="/static/js/graphsPlus.js"></script>
-
-{% endblock script0 %}
 
 {% block title %}Graphs{% endblock title %}
 {% block content %}
 
+
+
+
 <div class="wrapper">
     <header class="header">Today measures</header>
-
-
-
-    <div class="row">
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">Temperature</h2>
-            <h3 class="titulo-resultado">{{Temperature}} °C</h3>
-        </div>
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">Humidity</h2>
-            <h3 class="titulo-resultado">{{Humidity}} %</h3>
-        </div>
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">Pression</h2>
-            <h3 class="titulo-resultado">{{Pression}} kPa</h3>
-        </div>
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">PM25</h2>
-            <h3 class="titulo-resultado">{{PM25}} µg/m3</h3>
-        </div>
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">PM10</h2>
-            <h3 class="titulo-resultado">{{PM10}} µg/m3</h3>
-        </div>
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">Report date</h2>
-            <h3 class="titulo-resultado">{{fecha}} </h3>
-        </div>
-    </div>
-
-    <div class="row">
-        <!-- General graph Tem, Hum, Pres, P2.5 and pm10 -->
-        <div class="col-10 col-sm-5 col-md-10 part1">
-            <div>
-                <h3 class="titulo_graph" id="GeneralGraph">Graph</h3>
-            </div>
+    <article class="main">
+        <!-- <div class="col-10 col-sm-5 col-md-10 part1"> -->
+        <div class="col-10 col-sm-5 col-md-7 part1">
             <div class="graph">
                 <canvas id="myChart"></canvas>
             </div>
         </div>
+    </article>
 
-    </div>
-
-
-
-    <!-- <aside class="aside aside-2">
-        <div class="col-10 col-sm-5 col-md-5 part1">
-            <div class="table_data">
-                {{DailyAverage|safe}}
-            </div>
-
-        </div>
-    </aside> -->
 
     <footer class="footer">Today is a great day to go for a walk</footer>
 </div>
 
 
 {% endblock content %}
+
+{% block script %}
+<!-- Chart js -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+<script src="/static/js/graphsPlus.js"></script>
+<!-- Google charts -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+{% endblock script %}

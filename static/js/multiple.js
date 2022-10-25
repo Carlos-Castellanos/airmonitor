@@ -1,9 +1,11 @@
-const labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+const labels = ["2021-01-01", "2021-01-02", "2021-01-03", "2021-01-04", "2021-01-05", "2021-01-06", "2021-01-07", "2021-01-08", "2021-01-09", "2021-01-10",];
 
 console.log({ totaltemperatura })
 console.log(labels)
 
-let dates = fechamediciones;
+let dates = totaldates;
+//let dates = Label_Seconds;
+
 let temp = totaltemperatura;
 let hum = totalhumedad;
 let pres = totalpresion;
@@ -80,6 +82,12 @@ let myChart = new Chart(ctx, {
                 type: 'linear',
                 display: true,
                 position: 'left',
+            },
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'day'
+                }
             }
 
         },

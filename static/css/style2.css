@@ -91,7 +91,7 @@ select {
     align-items: center;
     height: 600px;
     border-radius: 10px;
-    background-color: #e0e4be;
+    background-color: #bee4dc;
 }
 
 .titulo_graph {
@@ -101,7 +101,7 @@ select {
 
 .graph {
     width: 100%;
-    height: 72%;
+    height: 50%;
     text-align: center;
     align-items: center;
 }
