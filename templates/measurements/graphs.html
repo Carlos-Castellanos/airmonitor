@@ -3,7 +3,6 @@
 {% block title %}Graphs{% endblock title %}
 {% block content %}
 
-
 <div class="wrapper">
     <header class="header">Today measures</header>
 
@@ -36,7 +35,6 @@
         </div>
     </div>
 
-
     <div class="row">
         <!-- General graph Tem, Hum, Pres, P2.5 and pm10 -->
         <div class="col-10 col-sm-5 col-md-10 part1">
@@ -45,30 +43,26 @@
             </div>
             <div class="graph">
                 <canvas id="myChart"></canvas>
+                <div class="form  main">
+                    Start: <input id="start" type="date" min="2021-01-01" max="2021-12-31" value="2021-01-01">
+                    End: <input id="end" type="date" min="2021-01-01" max="2021-12-31" value="2021-12-31">
+                    <!-- <button id="btnFilter" class="btn btn-primary" onclick="filterDate()">Filter</button> -->
+                    <!-- <button class="btn btn-primary" onclick="resetDate()">Reset</button> -->
+                    <button id="btnFilter" class="btn btn-primary">Filter</button>
+                    <button id="btnReset" class="btn btn-primary">Reset</button>
+                </div>
             </div>
         </div>
-
     </div>
 
-
-
-    <!-- <aside class="aside aside-2">
-        <div class="col-10 col-sm-5 col-md-5 part1">
-            <div class="table_data">
-                {{DailyAverage|safe}}
-            </div>
-
-        </div>
-    </aside> -->
 
     <footer class="footer">Table </footer>
 </div>
-<p>{{ Label_Seconds }}</p>
-<div class="main">
+<!-- <div class="main">
     <div clase="Table">
         {{Global|safe}}
     </div>
-</div>
+</div> -->
 
 {% endblock content %}
 
@@ -84,10 +78,7 @@
     const totalpresion = {{ total_presion }}
     const totalpm25 = {{ total_pm25 }}
     const totalpm10 = {{ total_pm10 }}
-    // const fechamediciones = {{ fecha_mediciones }}
     const fechamediciones = {{ GlobalDates }}
-    const LabelSeconds = {{ Label_Seconds }}
-
 </script>
 <script src="/static/js/multiple.js"></script>
 <!-- Google charts -->
