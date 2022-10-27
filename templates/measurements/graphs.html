@@ -4,65 +4,67 @@
 {% block content %}
 
 <div class="wrapper">
-    <header class="header">Today measures</header>
-
-
-
-    <div class="row">
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">Temperature</h2>
-            <h3 class="titulo-resultado">{{Temperature}} °C</h3>
+    <header class="header">
+        Report date: {{fecha}} to {{fecha2}}
+    </header>
+    <aside class="aside aside-2">
+        <div class="row">
+            <form class="form  main">
+                <label for="">Periodicity<select id="listPeriodicity" type="number" class="form-select">
+                        <option selectd hidden value="-1">-Select the periodicity-</option>
+                        <option value="0">Diary</option>
+                        <option value="1">Weekly</option>
+                        <option value="3">Monthly</option>
+                        <option value="9">Yearly</option>
+                    </select>
+                </label>
+            </form>
         </div>
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">Humidity</h2>
-            <h3 class="titulo-resultado">{{Humidity}} %</h3>
-        </div>
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">Pression</h2>
-            <h3 class="titulo-resultado">{{Pression}} kPa</h3>
-        </div>
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">PM25</h2>
-            <h3 class="titulo-resultado">{{PM25}} µg/m3</h3>
-        </div>
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">PM10</h2>
-            <h3 class="titulo-resultado">{{PM10}} µg/m3</h3>
-        </div>
-        <div class="resumen-forma">
-            <h2 class="titulo-forma">Report date</h2>
-            <h3 class="titulo-resultado">{{fecha}} </h3>
-        </div>
-    </div>
-
-    <div class="row">
-        <!-- General graph Tem, Hum, Pres, P2.5 and pm10 -->
-        <div class="col-10 col-sm-5 col-md-10 part1">
-            <div>
-                <h3 class="titulo_graph" id="GeneralGraph">Graph</h3>
+        <div class="row">
+            <div class="resumen-forma">
+                <h2 class="titulo-forma">Temperature</h2>
+                <h3 class="titulo-resultado">{{Temperature}} °C</h3>
             </div>
-            <div class="graph">
-                <canvas id="myChart"></canvas>
-                <div class="form  main">
-                    Start: <input id="start" type="date" min="2021-01-01" max="2021-12-31" value="2021-01-01">
-                    End: <input id="end" type="date" min="2021-01-01" max="2021-12-31" value="2021-12-31">
-                    <!-- <button id="btnFilter" class="btn btn-primary" onclick="filterDate()">Filter</button> -->
-                    <!-- <button class="btn btn-primary" onclick="resetDate()">Reset</button> -->
-                    <button id="btnFilter" class="btn btn-primary">Filter</button>
-                    <button id="btnReset" class="btn btn-primary">Reset</button>
+            <div class="resumen-forma">
+                <h2 class="titulo-forma">Humidity</h2>
+                <h3 class="titulo-resultado">{{Humidity}} %</h3>
+            </div>
+            <div class="resumen-forma">
+                <h2 class="titulo-forma">Pressure</h2>
+                <h3 class="titulo-resultado">{{Pression}} kPa</h3>
+            </div>
+            <div class="resumen-forma">
+                <h2 class="titulo-forma">PM25</h2>
+                <h3 class="titulo-resultado">{{PM25}} µg/m3</h3>
+            </div>
+            <div class="resumen-forma">
+                <h2 class="titulo-forma">PM10</h2>
+                <h3 class="titulo-resultado">{{PM10}} µg/m3</h3>
+            </div>
+
+        </div>
+    </aside>
+
+    <article class="main container">
+
+
+        <div class="row">
+            <div class="col-10 col-sm-5 col-md-10 part1">
+                <div class="graph">
+                    <canvas id="myChart"></canvas>
+                    <div class="form  main">
+                        Start: <input id="start" type="date" min="2021-01-01" max="2021-12-31" value="2021-01-01">
+                        End: <input id="end" type="date" min="2021-01-01" max="2021-12-31" value="2021-01-15">
+                        <button id="btnFilter" class="btn btn-primary">Filter</button>
+                        <button id="btnReset" class="btn btn-primary">Reset</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </article>
 
-
-    <footer class="footer">Table </footer>
+    <footer class="footer"> </footer>
 </div>
-<!-- <div class="main">
-    <div clase="Table">
-        {{Global|safe}}
-    </div>
-</div> -->
 
 {% endblock content %}
 
@@ -78,7 +80,20 @@
     const totalpresion = {{ total_presion }}
     const totalpm25 = {{ total_pm25 }}
     const totalpm10 = {{ total_pm10 }}
-    const fechamediciones = {{ GlobalDates }}
+
+    const monthlydates = {{ monthly_dates }}
+    const monthlytemperatura = {{ monthly_temperatura }}
+    const monthlyhumedad = {{ monthly_humedad }}
+    const monthlypresion = {{ monthly_presion }}
+    const monthlypm25 = {{ monthly_pm25 }}
+    const monthlypm10 = {{ monthly_pm10 }}
+
+    const yearlydates = {{ yearly_dates }}
+    const yearlytemperatura = {{ yearly_temperatura }}
+    const yearlyhumedad = {{ yearly_humedad }}
+    const yearlypresion = {{ yearly_presion }}
+    const yearlypm25 = {{ yearly_pm25 }}
+    const yearlypm10 = {{ yearly_pm10 }}
 </script>
 <script src="/static/js/multiple.js"></script>
 <!-- Google charts -->

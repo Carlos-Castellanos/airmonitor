@@ -23,73 +23,41 @@
 .resumen-forma {
 
     margin: 10px auto;
-    padding: 5px .3em;
-    height: 65px;
+    padding: 3px .3em;
+    height: 55px;
     width: 130px;
 
     border-radius: 10px;
     text-align: center;
     justify-content: center;
-    background-color: #626834;
+    background-color: #757c3e;
 
 }
 
 .titulo-forma {
     font-size: 100%;
-    padding: 5px .3em;
+    padding: 1px .3em;
     color: beige;
 }
 
 .titulo-resultado {
-    font-size: 100%
+    font-size: 90%
+}
+
+.titulo-rango {
+    font-size: 60%
 }
 
 /* Dasboard */
 
-.selector_container {
-    margin: 10px auto;
-    padding: 10px auto;
-    text-align: center;
-    align-items: center;
-    border-radius: 10px;
-    background-color: #626834;
-
-}
-
-.selector {
-    text-align: center;
-    align-items: center;
-}
-
-select {
-    background: transparent;
-    border: none;
-    font-size: 14px;
-    height: 30px;
-    padding: 5px;
-    width: 250px;
-    text-align: center;
-    align-items: center;
-}
-
-
-.boton_container {
-    padding: 10px .1em;
-    text-align: center;
-    align-items: center;
-}
-
-.boton {
-    margin: 30px auto;
-    padding: 30px .1em;
-}
-
 .part1 {
-    margin: 5px auto;
+    position: relative;
+    margin: 1px auto;
     padding: 5px auto;
     text-align: center;
     align-items: center;
     height: 600px;
+    width: 100%;
     border-radius: 10px;
     background-color: #bee4dc;
 }
@@ -101,10 +69,12 @@ select {
 
 .graph {
     width: 100%;
-    height: 50%;
+    height: 85%;
     text-align: center;
     align-items: center;
 }
+
+
 
 /* table */
 

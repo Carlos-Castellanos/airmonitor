@@ -8,6 +8,7 @@ from .views import(
     Inicio,
     barras,
     graphs2,
+    diary,
 )
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView
@@ -22,5 +23,7 @@ urlpatterns = [
     path('showdata/',showdata, name='measurements_showdata'),
     path('showgraphs/',Inicio, name='measurements_graphs'),
     path('barras/',barras, name='measurements_barras'),
-    path('graphs2/',graphs2, name='measurements_graphs2')
+    path('graphs2/',graphs2, name='measurements_graphs2'),
+    path('', diary, name="measurements_diary"),
+    
 ]

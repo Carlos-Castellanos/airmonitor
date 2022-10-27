@@ -19,6 +19,9 @@ from django.shortcuts import  render, redirect, get_object_or_404
 #from django.urls import reverse_lazy
 from .models import Measurements
 
+  
+
+    
 # csv import - export
 #name,measurementDate,measurementTime,Latitude,Longitude,Temperature,Humidity,Pression,PM25,PM10
 def sensor_export_csv(request):
@@ -143,27 +146,34 @@ def Inicio (request):
     # resumen
     
     Temperature = "{:,.0f}".format(total_res_wor['Temperature'][0])
-    Humidity = "{:,.0f}".format(total_res_wor['Humidity'][0])
-    Pression = "{:,.0f}".format(total_res_wor['Pression'][0])
-    PM25 = "{:,.0f}".format(total_res_wor['PM25'][0])
-    PM10 = "{:,.0f}".format(total_res_wor['PM10'][0])
-    Dates = "{}".format(total_res_wor['vDate'][0])
+    Humidity    = "{:,.0f}".format(total_res_wor['Humidity'][0])
+    Pression    = "{:,.0f}".format(total_res_wor['Pression'][0])
+    PM25   = "{:,.0f}".format(total_res_wor['PM25'][0])
+    PM10   = "{:,.0f}".format(total_res_wor['PM10'][0])
+    Dates  = "{}".format(total_res_wor['vDate'][0])
+    Dates2 = "{}".format(total_res_wor['vDate2'][0])
     
-    total_dates = df_Label['Fech'].tolist()
+    total_dates       = df_Label['Fech'].tolist()
     total_temperatura = Global['Temp'].tolist()
-    total_humedad = Global['Hum'].tolist()
-    total_presion = Global['Pres'].tolist()
-    total_pm25 = Global['PM25'].tolist()
-    total_pm10 = Global['PM10'].tolist()
+    total_humedad     = Global['Hum'].tolist()
+    total_presion     = Global['Pres'].tolist()
+    total_pm25        = Global['PM25'].tolist()
+    total_pm10        = Global['PM10'].tolist()
     
-    #fecha_mediciones = Global['MDate'].tolist()  
-    #fecha_mediciones = ["aa", "bb", "cc", "dd", "ee", "ff"]
-    fecha_mediciones = [23]
- 
-    #GlobalDates = Global['MDate'].dt.strftime('%f').tolist()
-    #GlobalDates = Global['MDate'].values.astype(np.int64).tolist()
+    monthly_dates       = df_LabelMonthly['Fech'].tolist()
+    monthly_temperatura = Monthly['Temp'].tolist()
+    monthly_humedad     = Monthly['Hum'].tolist()
+    monthly_presion     = Monthly['Pres'].tolist()
+    monthly_pm25        = Monthly['PM25'].tolist()
+    monthly_pm10        = Monthly['PM10'].tolist()
+    
+    yearly_dates       = df_LabelYearly['Fech'].tolist()
+    yearly_temperatura = Yearly['Temp'].tolist()
+    yearly_humedad     = Yearly['Hum'].tolist()
+    yearly_presion     = Yearly['Pres'].tolist()
+    yearly_pm25        = Yearly['PM25'].tolist()
+    yearly_pm10        = Yearly['PM10'].tolist()
   
-   
     GlobalDates = Global['Temp'].tolist()
     context = {
         # resumen
@@ -173,19 +183,33 @@ def Inicio (request):
         'PM25': PM25,
         'PM10' : PM10,
         'fecha': Dates,
+        'fecha2': Dates2,
   
-        # Graph
-        'Label_Seconds' : Label_Seconds,
+        # Graph dairy
         'total_dates'  : total_dates,
         'total_temperatura' : total_temperatura,
         'total_humedad' : total_humedad,
         'total_presion' : total_presion,
         'total_pm25' : total_pm25, 
         'total_pm10' : total_pm10,               
-        'fecha_mediciones' : fecha_mediciones,
-        'GlobalDates' : GlobalDates,
+
+        
+        # Graph month 
+        'monthly_dates'  : monthly_dates,
+        'monthly_temperatura' : monthly_temperatura,
+        'monthly_humedad' : monthly_humedad,
+        'monthly_presion' : monthly_presion,
+        'monthly_pm25' : monthly_pm25, 
+        'monthly_pm10' : monthly_pm10,  
         
         
+        # Graph year 
+        'yearly_dates'  : yearly_dates,
+        'yearly_temperatura' : yearly_temperatura,
+        'yearly_humedad' : yearly_humedad,
+        'yearly_presion' : yearly_presion,
+        'yearly_pm25' : yearly_pm25, 
+        'yearly_pm10' : yearly_pm10,  
         # Table
         
         "Global": Global.to_html(classes='table table-striped'),
@@ -214,6 +238,29 @@ def barras(request):
 def graphs2 (request):
     context = { }
     return render(request,'measurements/graphsPlus.html',context)
+
+
+def diary (request):
+    
+    Temperature = "{:,.0f}".format(dailyAVG['Temperature'][0])
+    Humidity = "{:,.0f}".format(dailyAVG['Humidity'][0])
+    Pression = "{:,.0f}".format(dailyAVG['Pression'][0])
+    PM25 = "{:,.0f}".format(dailyAVG['PM25'][0])
+    PM10 = "{:,.0f}".format(dailyAVG['PM10'][0])
+    Dates = "{}".format(dailyAVG['vDate'][0])
+   
+    
+    context = {
+        # resumen
+        'Temperature': Temperature,
+        'Humidity': Humidity,
+        'Pression': Pression,
+        'PM25': PM25,
+        'PM10' : PM10,
+        'fecha': Dates,
+    }
+
+    return render(request,'measurements/diary.html',context)
 
 
 
