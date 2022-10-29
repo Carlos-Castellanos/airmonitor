@@ -2,25 +2,26 @@
 import csv
 from distutils.command.upload import upload
 from pipes import Template
-#from urllib import request
+
 from django.http import HttpRequest, HttpResponse
 from import_export import resources
 import numpy as np
 from .models import Measurements
-#import daas
+
 from .data import *
 import pandas as pd
 import json
-#import file
-#from django.conf import settings
+
+
 from django.views.generic import TemplateView
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import  render, redirect, get_object_or_404
-#from django.urls import reverse_lazy
+
 from .models import Measurements
 
   
-
+############################################################################################################################################
+# Migrate sensos data (upload.html)
     
 # csv import - export
 #name,measurementDate,measurementTime,Latitude,Longitude,Temperature,Humidity,Pression,PM25,PM10
@@ -104,9 +105,9 @@ def simple_upload(request):
         })
     return render(request, 'measurements/upload.html')
         
+############################################################################################################################################
 # Tresting table (table.html)
 def showdata(request):
-    # ['name','measurementDate','measurementTime','Latitude','Longitude','Temperature','Humidity','Pression','PM25','PM10']
     item = Measurements.objects.all().values()
     myFrame = pd.DataFrame(item)
     myFrame=myFrame.rename(columns={'name':'Sensor','measurementDate':'Date','measurementTime':'Time','Latitude':'Lat','Longitude':'Lon','Temperature':'Temp','Humidity':'Hum','Pression':'Pres','PM25':'pm2.5','PM10':'pm10'})
@@ -121,15 +122,6 @@ def showdata(request):
     myFrame['pm2.5'] = myFrame['pm2.5'].astype(float, errors = 'raise')
     myFrame['pm10'] = myFrame['pm10'].astype(float, errors = 'raise')
 
-    # df = myFrame.head(5)
-    #df = myFrame[(myFrame['Sensor'] == '2') & (myFrame['Pres'] > 12.39)]
-    #df = myFrame[myFrame['Date'] == date2]
-    # df = myFrame.groupby(by = 'Sensor').mean()  error
-
-    # df = myFrame.groupby(by=['Date']).sum().groupby(level=[0]).cumsum()
-    # df = df.groupby(by=['Date']).sum().groupby(level=[0]).cumsum()
-    # df = myFrame.describe()
-    # print(myFrame.info())
     #filtrado por fechas
     date1 = "2021-01-01"
     date2 = "2021-01-31"
@@ -141,7 +133,8 @@ def showdata(request):
 
     return render(request, 'measurements/table.html', context=mydict)       
         
-
+############################################################################################################################################
+# Global graphs (graphs.html)
 def Inicio (request):
     # resumen
     
@@ -174,7 +167,6 @@ def Inicio (request):
     yearly_pm25        = Yearly['PM25'].tolist()
     yearly_pm10        = Yearly['PM10'].tolist()
   
-    GlobalDates = Global['Temp'].tolist()
     context = {
         # resumen
         'Temperature': Temperature,
@@ -193,15 +185,13 @@ def Inicio (request):
         'total_pm25' : total_pm25, 
         'total_pm10' : total_pm10,               
 
-        
         # Graph month 
         'monthly_dates'  : monthly_dates,
         'monthly_temperatura' : monthly_temperatura,
         'monthly_humedad' : monthly_humedad,
         'monthly_presion' : monthly_presion,
         'monthly_pm25' : monthly_pm25, 
-        'monthly_pm10' : monthly_pm10,  
-        
+        'monthly_pm10' : monthly_pm10,     
         
         # Graph year 
         'yearly_dates'  : yearly_dates,
@@ -217,29 +207,14 @@ def Inicio (request):
 
     return render(request,'measurements/graphs.html',context)
 
-    
-def barras(request):
-    products = Measurements.objects.all()
-#     if request.method == 'POST':
-#         form = ProductForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('index')
-#     else:
-#         form = ProductForm()        
-    context = {
-        "products": products,
-        # "form": form
-    }
-    return render(request, 'measurements/barras.html', context)
-
-    
-
+############################################################################################################################################
+# Sensor Graphs  (graphs2.html)
 def graphs2 (request):
     context = { }
     return render(request,'measurements/graphsPlus.html',context)
 
-
+############################################################################################################################################
+# Todays measurements  (home: diary.html)
 def diary (request):
     
     Temperature = "{:,.0f}".format(dailyAVG['Temperature'][0])

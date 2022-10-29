@@ -6,7 +6,6 @@ from .views import(
     simple_upload,
     showdata,
     Inicio,
-    barras,
     graphs2,
     diary,
 )
@@ -22,7 +21,6 @@ urlpatterns = [
     path('upload/',simple_upload, name='file_upload'),
     path('showdata/',showdata, name='measurements_showdata'),
     path('showgraphs/',Inicio, name='measurements_graphs'),
-    path('barras/',barras, name='measurements_barras'),
     path('graphs2/',graphs2, name='measurements_graphs2'),
     path('', diary, name="measurements_diary"),
     

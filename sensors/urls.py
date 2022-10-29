@@ -4,8 +4,11 @@ from .views import(
     SensorDetailView,
     SensorCreateView,
     SensorDeleteView,
-    SensorUpdateView
+    SensorUpdateView,
+    FoliumView
 )
+
+
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views
@@ -18,5 +21,5 @@ urlpatterns = [
     path('new/', SensorCreateView.as_view(), name="sensor_new"),
     path('<int:pk>/delete/', SensorDeleteView.as_view(), name="sensor_delete"),
     path('<int:pk>/edit/', SensorUpdateView.as_view(), name="sensor_edit"),
-
+    path('maps/', FoliumView.as_view(), name="show_map"),
 ]

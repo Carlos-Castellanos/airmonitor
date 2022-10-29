@@ -3,7 +3,7 @@ import pandas as pd
 # import numpy as np
 from datetime import date, timedelta, datetime
 from dateutil.relativedelta import relativedelta
-from .models import Measurements
+from measurements.models import Measurements
 
 ##################################################################
 ####  Importación de la tabla a un dataframe de panda

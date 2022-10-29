@@ -97,6 +97,9 @@ let myChart = new Chart(ctx, {
                 },
                 ticks: {
                     color: 'blue',
+                    stepSize: 1,
+                    min: 0,
+                    autoSkip: false
                 },
                 title: {
                     color: 'red',

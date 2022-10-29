@@ -1,20 +1,25 @@
 from urllib import request
 from django.shortcuts import render
 from django.contrib import messages
+from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import( 
     CreateView, 
     DeleteView,
     UpdateView
 )
-
+import folium
+from .data import *
 
 from django.shortcuts import render, redirect, get_object_or_404
 
 
 # https://docs.djangoproject.com/en/4.1/ref/class-based-views/flattened-index/
 from django.urls import is_valid_path, reverse_lazy
+
+from measurements.models import Measurements
 from .models import Sensor
+
 
 # Create your views here.
 
@@ -22,7 +27,7 @@ class SensorListView(ListView):
     template_name = "sensors/list.html"   
     model = Sensor
 
-
+ 
 class SensorDetailView(DetailView):
     template_name = "sensors/detail.html"  
     model = Sensor
@@ -55,3 +60,44 @@ class SensorDeleteView(DeleteView):  #113
     def test_func(self):                                #113
         obj = self.get_object()
         return obj.author == self.request.user
+    
+class FoliumView(TemplateView):
+    template_name = "sensors/sensor_map.html"
+    model = Sensor
+    fields = ["name","Latitude","Longitude","Temperature","Humidity","Pression","PM25","PM10"]  
+
+    def get_context_data(self, **kwargs):
+        m = folium.Map(
+            location=[32.6207486, -115.3982056],
+            zoom_start=13
+            ) 
+        
+        sensores = Sensor.objects.all()
+
+        for a in sensores:
+            folium.Marker(
+                location=[a.Latitude, a.Longitude],
+                tooltip="Click for information",
+
+                popup=folium.Popup(f"""Sensor= {a.name} <br>
+                       Temp = {Temperature} °C<br>
+                       Hum = {Humidity} %<br>
+                       Pres = {Pression} kPa<br>
+                       pm 2.5 = {PM25} µg/m<sup>3</sup><br>
+                       pm 10 = {PM10} µg/m<sup>3</sup><br>
+                    """, max_width=len(f"name= {a.name}")*20),
+                icon=folium.Icon(icon='cloud')
+            ).add_to(m)
+
+        
+        m = m._repr_html_()
+        return {"m": m}
+    
+ 
+
+
+ 
+    
+    
+    
+    

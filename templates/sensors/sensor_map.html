@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+{% block content %}
+
+<div class="wrapper">
+    <header class="header">Today measures</header>
+    <article class="main pt-3  ">
+        <div class="row">
+            <div class="container col-md-11">
+                {{m|safe}}
+            </div>
+        </div>
+    </article>
+    <aside class="aside aside-2">
+        <label for="">Periodicity<select id="txtStatus" type="number" class="form-select">
+                <option selectd hidden value="-1">-Select the periodicity-</option>
+                <option value="0">Diary</option>
+                <option value="1">Weekly</option>
+                <option value="3">Monthly</option>
+                <option value="9">Yearly</option>
+            </select>
+        </label>
+        <br><br>
+        <div>
+            <p>Temperature: 98</p>
+        </div>
+        <div>
+            <p> humidity: 47%</p>
+        </div>
+        <div>
+            <p> PM 2.5: 12.11</p>
+        </div>
+        <div>
+            <p> PM 10: 4.23</p>
+        </div>
+    </aside>
+    <footer class="footer"></footer>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script> { { map.script.render | safe } } </script>
+{% endblock script %}

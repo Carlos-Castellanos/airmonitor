@@ -5,8 +5,8 @@ from django.urls import reverse
 # Create your models here.
 class Sensor(models.Model):
     name = models.CharField(max_length=10)
-    Latitude= models.BooleanField()
-    Longitude= models.BooleanField()
+    Latitude = models.DecimalField(default=0, max_digits=8, decimal_places=5)
+    Longitude =  models.DecimalField(default=0, max_digits=8, decimal_places=5)
     Temperature= models.BooleanField()
     Humidity= models.BooleanField()
     Pression= models.BooleanField()
