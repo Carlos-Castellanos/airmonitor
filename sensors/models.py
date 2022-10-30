@@ -4,9 +4,10 @@ from django.urls import reverse
 
 # Create your models here.
 class Sensor(models.Model):
+    idSensor = models.IntegerField(primary_key=True, null=False)
     name = models.CharField(max_length=10)
-    Latitude = models.DecimalField(default=0, max_digits=8, decimal_places=5)
-    Longitude =  models.DecimalField(default=0, max_digits=8, decimal_places=5)
+    Latitude = models.DecimalField(default=0, max_digits=10, decimal_places=7)
+    Longitude =  models.DecimalField(default=0, max_digits=10, decimal_places=7)
     Temperature= models.BooleanField()
     Humidity= models.BooleanField()
     Pression= models.BooleanField()
@@ -21,3 +22,4 @@ class Sensor(models.Model):
         return reverse("sensor_list")
 
         #return reverse("pages/home")
+        

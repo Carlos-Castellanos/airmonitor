@@ -9,9 +9,14 @@ from .models import Measurements
 ####  Importación de la tabla a un dataframe de panda
 
 #name,measurementDate,measurementTime,Latitude,Longitude,Temperature,Humidity,Pression,PM25,PM10
+# item = Measurements.objects.all()
+
+# item.delete()
+
 item = Measurements.objects.all().values()
+
 df = pd.DataFrame(item)
-df=df.rename(columns={'name':'Sensor','measurementDate':'MDate','measurementTime':'Time','Latitude':'Lat','Longitude':'Lon','Temperature':'Temp','Humidity':'Hum','Pression':'Pres','PM25':'PM25','PM10':'PM10'})
+df=df.rename(columns={'idSensor':'Sensor','measurementDate':'MDate','measurementTime':'Time','Latitude':'Lat','Longitude':'Lon','Temperature':'Temp','Humidity':'Hum','Pression':'Pres','PM25':'PM25','PM10':'PM10'})
 
 # convert object to float
 df['Lat'] = df['Lat'].astype(float, errors = 'raise')
@@ -21,6 +26,8 @@ df['Hum'] = df['Hum'].astype(float, errors = 'raise')
 df['Pres'] = df['Pres'].astype(float, errors = 'raise')
 df['PM25'] = df['PM25'].astype(float, errors = 'raise')
 df['PM10'] = df['PM10'].astype(float, errors = 'raise')
+
+
 
 # convert object to to_datetime
 df['MDate'] = pd.to_datetime(df['MDate'])
@@ -60,16 +67,12 @@ List_MonthYear.sort()
 List_MY_datetime = []
 for i, w in enumerate(List_MonthYear):
     List_MY_datetime.append(datetime.strptime(List_MonthYear[i],"%Y-%m-%d"))
-# print('List_MY_datetime')
-# print(List_MY_datetime)
+
 Label_SecondsMonth = [x.timestamp()*1000 for x in List_MY_datetime]
 df_LabelMonthly = pd.DataFrame(Label_SecondsMonth,columns=col)
 
 Monthly = Monthly.groupby(['Month', 'Year']).mean()
-# print()
-# print(Monthly.info())
-# print(Monthly)
-# print()
+
 
 ## group by year
 
@@ -84,7 +87,7 @@ List_Year.append('2023-01-01')
 
 List_Year = list(set(List_Year)) 
 List_Year.sort()
-print("List_Year   SORT")
+print("----------------------------------------------------------------------------List_Year   SORT")
 print(List_Year)
 List_Y_datetime = []
 for i, w in enumerate(List_Year):

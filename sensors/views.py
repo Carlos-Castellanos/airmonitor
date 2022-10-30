@@ -35,7 +35,7 @@ class SensorDetailView(DetailView):
 class SensorCreateView(CreateView): #113
     template_name = "sensors/new.html"  
     model = Sensor
-    fields = ["name","Latitude","Longitude","Temperature","Humidity","Pression","PM25","PM10"]  
+    fields = ["idSensor","name","Latitude","Longitude","Temperature","Humidity","Pression","PM25","PM10"]  
 
     # def form_valid(self, form):       #take tha user and save it like author'field
     #     form.instance.author = self.request.user
@@ -45,7 +45,7 @@ class SensorCreateView(CreateView): #113
 class SensorUpdateView(UpdateView): #113
     template_name = "sensors/edit.html"  
     model = Sensor
-    fields = ["name","Latitude","Longitude","Temperature","Humidity","Pression","PM25","PM10"]   
+    fields = ["idSensor","name","Latitude","Longitude","Temperature","Humidity","Pression","PM25","PM10"]   
 
     def test_func(self):                                #113
         obj = self.get_object()
@@ -64,27 +64,34 @@ class SensorDeleteView(DeleteView):  #113
 class FoliumView(TemplateView):
     template_name = "sensors/sensor_map.html"
     model = Sensor
-    fields = ["name","Latitude","Longitude","Temperature","Humidity","Pression","PM25","PM10"]  
+    #form_class = RevisionForm 
 
     def get_context_data(self, **kwargs):
+
+        for key, value in kwargs.items():
+            print("{0} = {1}".format(key, value))
+        print(kwargs["yy"])
+        datas = datasYY(2021)
         m = folium.Map(
             location=[32.6207486, -115.3982056],
             zoom_start=13
             ) 
         
         sensores = Sensor.objects.all()
+        print("dictionarySensor")
+        for a in sensores:
+            print(datas['idSensor'][a.idSensor])
 
         for a in sensores:
             folium.Marker(
                 location=[a.Latitude, a.Longitude],
                 tooltip="Click for information",
-
                 popup=folium.Popup(f"""Sensor= {a.name} <br>
-                       Temp = {Temperature} °C<br>
-                       Hum = {Humidity} %<br>
-                       Pres = {Pression} kPa<br>
-                       pm 2.5 = {PM25} µg/m<sup>3</sup><br>
-                       pm 10 = {PM10} µg/m<sup>3</sup><br>
+                       Temp = {datas['Temp'][a.idSensor]:,.2f} °C<br>
+                       Hum = {datas['Hum'][a.idSensor]:,.2f} %<br>
+                       Pres = {datas['Pres'][a.idSensor]:,.2f} kPa<br>
+                       pm 2.5 = {datas['PM25_x'][a.idSensor]:,.4f} µg/m<sup>3</sup><br>
+                       pm 10 = {datas['PM10_x'][a.idSensor]:,.4f} µg/m<sup>3</sup><br>
                     """, max_width=len(f"name= {a.name}")*20),
                 icon=folium.Icon(icon='cloud')
             ).add_to(m)

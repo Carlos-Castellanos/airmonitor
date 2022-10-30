@@ -7,6 +7,8 @@ from django.http import HttpRequest, HttpResponse
 from import_export import resources
 import numpy as np
 from .models import Measurements
+from sensors.models import Sensor
+
 
 from .data import *
 import pandas as pd
@@ -54,9 +56,10 @@ def native_import_csv(myfile):
     with open(file, "r") as csv_file:
         data = list(csv.reader(csv_file, delimiter=","))
         for row in data[1:]:
+            idsensor = Sensor.objects.get(idSensor=int(row[0]))
             measurements.append(
                 Measurements(
-                    name =row[0],
+                    idSensor = idsensor,
                     measurementDate =format_date(row[1]),
                     measurementTime =row[2],
                     Latitude =row[3],
@@ -104,13 +107,14 @@ def simple_upload(request):
             'uploaded_file_url': uploaded_file_url
         })
     return render(request, 'measurements/upload.html')
+
         
 ############################################################################################################################################
 # Tresting table (table.html)
 def showdata(request):
     item = Measurements.objects.all().values()
     myFrame = pd.DataFrame(item)
-    myFrame=myFrame.rename(columns={'name':'Sensor','measurementDate':'Date','measurementTime':'Time','Latitude':'Lat','Longitude':'Lon','Temperature':'Temp','Humidity':'Hum','Pression':'Pres','PM25':'pm2.5','PM10':'pm10'})
+    myFrame=myFrame.rename(columns={'idSensor':'Sensor','measurementDate':'Date','measurementTime':'Time','Latitude':'Lat','Longitude':'Lon','Temperature':'Temp','Humidity':'Hum','Pression':'Pres','PM25':'pm2.5','PM10':'pm10'})
 
     # convert objetc to float
     myFrame['Date'] = pd.to_datetime(myFrame['Date'])

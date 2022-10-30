@@ -3,9 +3,11 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
+from sensors.models import Sensor
+
 # Create your models here.
 class Measurements(models.Model):
-    name = models.CharField(max_length=10)
+    idSensor = models.IntegerField(null=False)
     measurementDate =  models.DateField(default=datetime.now, blank=True)
     measurementTime =  models.TimeField(default=datetime.now, blank=True)
     Latitude = models.DecimalField(default=0, max_digits=10, decimal_places=7)
@@ -16,14 +18,13 @@ class Measurements(models.Model):
     PM25 =   models.DecimalField(default=0, max_digits=6, decimal_places=2)
     PM10 =  models.DecimalField(default=0, max_digits=6, decimal_places=2)
     id = models.AutoField(primary_key=True)
-    # sensor = models.ForeignKey(
-    #     get_user_model(),
-    #     on_delete=models.CASCADE
-    # )
+    
+    idSensor = models.ForeignKey(Sensor, on_delete=models.RESTRICT, null=True)
+
     class Meta:
         verbose_name = 'Measurement'
         verbose_name_plural = 'measurements'
-        ordering = ['id']
+        ordering = ['measurementDate','measurementTime','idSensor']
         
     def __str__(self):
         return self.name

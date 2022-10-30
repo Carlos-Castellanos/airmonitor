@@ -25,10 +25,10 @@
 
 {% if user.id == post.author.id %}
     <p>
-        <a href=" {% url 'post_edit' pk=post.id %}" class="btn btn-success"> Edit</a>
+        <a href=" {% url 'post_edit' pk=post.idSensor %}" class="btn btn-success"> Edit</a>
         </p>
         <p>
-            <a href="{% url 'post_delete' pk=post.id %}" class="btn btn-danger"> Delete </a>
+            <a href="{% url 'post_delete' pk=post.idSensor %}" class="btn btn-danger"> Delete </a>
         </p>
         {% endif %}
 

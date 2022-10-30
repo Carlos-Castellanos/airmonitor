@@ -21,5 +21,5 @@ urlpatterns = [
     path('new/', SensorCreateView.as_view(), name="sensor_new"),
     path('<int:pk>/delete/', SensorDeleteView.as_view(), name="sensor_delete"),
     path('<int:pk>/edit/', SensorUpdateView.as_view(), name="sensor_edit"),
-    path('maps/', FoliumView.as_view(), name="show_map"),
+    path('<int:yy>/maps/', FoliumView.as_view(), name="show_map"),
 ]
