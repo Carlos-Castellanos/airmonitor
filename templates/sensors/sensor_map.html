@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="wrapper">
-    <header class="header">Today measures</header>
+    <header class="header"> Report date: {{fecha}} to {{fecha2}}</header>
     <article class="main pt-3  ">
         <div class="row">
             <div class="container col-md-11">
@@ -12,27 +12,45 @@
             </div>
         </div>
     </article>
+    <!-- <aside class="aside aside-1">
+    </aside> -->
     <aside class="aside aside-2">
-        <label for="">Periodicity<select id="txtStatus" type="number" class="form-select">
-                <option selectd hidden value="-1">-Select the periodicity-</option>
-                <option value="0">Diary</option>
-                <option value="1">Weekly</option>
-                <option value="3">Monthly</option>
-                <option value="9">Yearly</option>
-            </select>
-        </label>
+        <div class="row">
+            <form class="form  main" id="fPeriodicity" method="get">
+                <select onchange="get_year()" id="anyo" name="anyo" type="number" class="form-select">
+                    <option selectd hidden value="-1">-Select the year-</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                </select>
+
+                <a class="btn btn-primary" id="bChange" href="#" accesskey="M">Change</a>
+                <!-- <button type="button" class="btn btn-primary" onclick="get_year()">leer año</button>-->
+                <label id="test">*******</label>
+                <br><br>
+            </form>
+        </div>
         <br><br>
-        <div>
-            <p>Temperature: 98</p>
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">Temperature</h2>
+            <h3 class="titulo-resultado">{{Temperature}} °C</h3>
         </div>
-        <div>
-            <p> humidity: 47%</p>
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">Humidity</h2>
+            <h3 class="titulo-resultado">{{Humidity}} %</h3>
         </div>
-        <div>
-            <p> PM 2.5: 12.11</p>
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">Pressure</h2>
+            <h3 class="titulo-resultado">{{Pression}} kPa</h3>
         </div>
-        <div>
-            <p> PM 10: 4.23</p>
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">PM25</h2>
+            <h3 class="titulo-resultado">{{PM25}} µg/m3</h3>
+        </div>
+        <div class="resumen-forma">
+            <h2 class="titulo-forma">PM10</h2>
+            <h3 class="titulo-resultado">{{PM10}} µg/m3</h3>
         </div>
     </aside>
     <footer class="footer"></footer>
@@ -42,4 +60,6 @@
 
 {% block script %}
 <script> { { map.script.render | safe } } </script>
+<script src="/static/js/sensor_map.js"></script>
+
 {% endblock script %}

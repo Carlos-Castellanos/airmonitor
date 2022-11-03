@@ -1,6 +1,3 @@
-from urllib import request
-from django.shortcuts import render
-from django.contrib import messages
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import( 
@@ -26,6 +23,7 @@ from .models import Sensor
 class SensorListView(ListView):
     template_name = "sensors/list.html"   
     model = Sensor
+    
 
  
 class SensorDetailView(DetailView):
@@ -64,47 +62,77 @@ class SensorDeleteView(DeleteView):  #113
 class FoliumView(TemplateView):
     template_name = "sensors/sensor_map.html"
     model = Sensor
-    #form_class = RevisionForm 
-
+    
     def get_context_data(self, **kwargs):
-
         for key, value in kwargs.items():
             print("{0} = {1}".format(key, value))
         print(kwargs["yy"])
-        datas = datasYY(2021)
+        
+        anyo=int(kwargs["yy"])
+        print(anyo)
+        #anyo=2021
+        datas = datasYY(anyo)
+        
         m = folium.Map(
             location=[32.6207486, -115.3982056],
             zoom_start=13
             ) 
         
         sensores = Sensor.objects.all()
-        print("dictionarySensor")
-        for a in sensores:
-            print(datas['idSensor'][a.idSensor])
+
 
         for a in sensores:
-            folium.Marker(
-                location=[a.Latitude, a.Longitude],
-                tooltip="Click for information",
-                popup=folium.Popup(f"""Sensor= {a.name} <br>
+            if a.idSensor in datas['Temp']:
+                popDatos = (f"""Sensor= {a.name} <br>
                        Temp = {datas['Temp'][a.idSensor]:,.2f} °C<br>
                        Hum = {datas['Hum'][a.idSensor]:,.2f} %<br>
                        Pres = {datas['Pres'][a.idSensor]:,.2f} kPa<br>
                        pm 2.5 = {datas['PM25_x'][a.idSensor]:,.4f} µg/m<sup>3</sup><br>
                        pm 10 = {datas['PM10_x'][a.idSensor]:,.4f} µg/m<sup>3</sup><br>
-                    """, max_width=len(f"name= {a.name}")*20),
+                    """)
+            else:
+                 popDatos = (f"""Sensor= {a.name} <br>
+                       Temp = without data <br>
+                       Hum = without data<br>
+                       Pres = without data <br>
+                       pm 2.5 = without data <br>
+                       pm 10 = without data<br>
+                    """)             
+                
+            folium.Marker(
+                location=[a.Latitude, a.Longitude],
+                tooltip="Click for information",
+                popup=folium.Popup(popDatos, max_width=len(f"name= {a.name}")*20),
                 icon=folium.Icon(icon='cloud')
             ).add_to(m)
 
         
         m = m._repr_html_()
-        return {"m": m}
+        
+        Global = generalMeans(anyo)
+        Temperature = "{:,.2f}".format(Global['Temperature'][0])
+        Humidity = "{:,.2f}".format(Global['Humidity'][0])
+        Pression = "{:,.2f}".format(Global['Pression'][0])
+        PM25 = "{:,.4f}".format(Global['PM25'][0])
+        PM10 = "{:,.4f}".format(Global['PM10'][0])
+        Dates = "{}".format(Global['vDate'][0])
+        Dates2 = "{}".format(Global['vDate2'][0])
+        
+        
+        lista = [2020,2021,2022,2023]
+        context ={
+            "m": m,
+            'Temperature': Temperature,
+            'Humidity': Humidity,
+            'Pression': Pression,
+            'PM25': PM25,
+            'PM10' : PM10,
+            'fecha': Dates,
+            'fecha2': Dates2,
+            "lista" : lista
+            
+        }
+        return context
+    
     
  
-
-
- 
-    
-    
-    
-    

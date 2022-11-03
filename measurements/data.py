@@ -87,8 +87,6 @@ List_Year.append('2023-01-01')
 
 List_Year = list(set(List_Year)) 
 List_Year.sort()
-print("----------------------------------------------------------------------------List_Year   SORT")
-print(List_Year)
 List_Y_datetime = []
 for i, w in enumerate(List_Year):
     List_Y_datetime.append(datetime.strptime(List_Year[i],"%Y-%m-%d"))
@@ -123,9 +121,6 @@ hoy = now.strftime('%Y-%m-%d')
 ### ajuste por los datos, toma 2021 como si fuera 2022
 lastyear = now + relativedelta(years=-1)
 format = lastyear.strftime('%Y-%m-%d')
-print()
-print(format)
-print()
 ###
 
 daily = df[df['MDate'] == format]   ### corregir por "hoy"

@@ -8,17 +8,21 @@
 
 <div class="wrapper">
     <header class="header">Today measures</header>
-    <article class="main">
-        <!-- <div class="col-10 col-sm-5 col-md-10 part1"> -->
-        <div class="col-10 col-sm-5 col-md-7 part1">
-            <div class="graph">
-                <canvas id="myChart"></canvas>
+    <article class="main container">
+
+        <div class="row">
+            <div class="col-10 col-sm-5 col-md-10 part1">
+                <div class="graph">
+                    <canvas id="myChart"></canvas>
+
+                </div>
             </div>
         </div>
     </article>
+    </article>
 
 
-    <footer class="footer">Today is a great day to go for a walk</footer>
+
 </div>
 
 
@@ -31,8 +35,16 @@
     src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
 <script src="/static/js/graphsPlus.js"></script>
-<!-- Google charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!--For hammer.js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
+    integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!--For chartjs-plugin-zoom.js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.1/chartjs-plugin-zoom.min.js"
+    integrity="sha512-klQv6lz2YR+MecyFYMFRuU2eAl8IPRo6zHnsc9n142TJuJHS8CG0ix4Oq9na9ceeg1u5EkBfZsFcV3U7J51iew=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 {% endblock script %}
