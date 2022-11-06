@@ -5,13 +5,14 @@ from .views import(
     SensorCreateView,
     SensorDeleteView,
     SensorUpdateView,
-    FoliumView
+    FoliumView,
+    SensorTables
 )
 
 
-from django.conf.urls.static import static
-from django.contrib.auth.views import LoginView, LogoutView
-from . import views
+# from django.conf.urls.static import static
+# from django.contrib.auth.views import LoginView, LogoutView
+# from . import views
 # from django.conf import settings
 
 
@@ -21,7 +22,8 @@ urlpatterns = [
     path('new/', SensorCreateView.as_view(), name="sensor_new"),
     path('<int:pk>/delete/', SensorDeleteView.as_view(), name="sensor_delete"),
     path('<int:pk>/edit/', SensorUpdateView.as_view(), name="sensor_edit"),
-    path('<int:yy>/maps/', FoliumView.as_view(), name="show_map"),
+    path('<str:yy>/maps/', FoliumView.as_view(), name="show_map"),
+    path('<str:yy>/table/', SensorTables.as_view(), name="show_table"),
     
 ]
 

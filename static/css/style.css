@@ -70,6 +70,7 @@ img {
     text-align: left;
     background: rgba(10, 19, 121, 0.3);
     color: white;
+    overflow: hidden
 }
 
 .table {

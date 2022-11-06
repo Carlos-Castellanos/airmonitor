@@ -132,7 +132,7 @@ def showdata(request):
     df = myFrame.loc[(myFrame['Date'] >= date1) & (myFrame['Date'] <= date2)]
     df = df.groupby(['Date']).mean()
     mydict = {
-        "df": df.to_html(classes='table table-striped')
+        "filterTable": df.to_html(classes='table table-striped')
     }
 
     return render(request, 'measurements/table.html', context=mydict)       

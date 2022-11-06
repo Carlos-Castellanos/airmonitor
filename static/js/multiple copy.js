@@ -23,6 +23,7 @@ let myChart = new Chart(ctx, {
             yAxisID: 'Celcius',
         },
         {
+
             label: 'Humidity %',
             data: hum,
             borderColor: 'rgba(3, 24, 252)',
@@ -86,7 +87,9 @@ let myChart = new Chart(ctx, {
                 type: 'time',
                 time: {
                     unit: 'day',
+
                 },
+
                 grid: {
                     color: 'red',
                     borderColor: 'blue',
@@ -104,28 +107,8 @@ let myChart = new Chart(ctx, {
                     text: 'Days'
                 }
             }
+
         },
-        plugins: {
-            zoom: {
-                pan: {
-                    enabled: false,
-                    mode: 'x',
-                },
-                zoom: {
-                    mode: 'x',
-                    wheel: {
-                        enabled: true
-                    },
-                    drag: {
-                        enabled: true,
-                        backgroundColor: 'rgba(108, 122, 137, 0.3)', //this color is called Lynch
-                    },
-                    pinch: {
-                        enabled: true
-                    }
-                }
-            }
-        }
     }
 });
 
