@@ -1,3 +1,4 @@
+
 let dates = totaldates;
 let temp = totaltemperatura;
 let hum = totalhumedad;
@@ -70,12 +71,6 @@ let myChart = new Chart(ctx, {
             intersect: false,
         },
         stacked: false,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Sensor Data'
-            }
-        },
         scales: {
             y: {
                 type: 'linear',
@@ -106,6 +101,10 @@ let myChart = new Chart(ctx, {
             }
         },
         plugins: {
+            title: {
+                display: true,
+                text: 'Sensor Data'
+            },
             zoom: {
                 pan: {
                     enabled: false,
@@ -114,21 +113,21 @@ let myChart = new Chart(ctx, {
                 zoom: {
                     mode: 'x',
                     wheel: {
+                        enabled: true,
+                    },
+                    pinch: {
                         enabled: true
                     },
                     drag: {
                         enabled: true,
                         backgroundColor: 'rgba(108, 122, 137, 0.3)', //this color is called Lynch
                     },
-                    pinch: {
-                        enabled: true
-                    }
+                    mode: 'xy',
                 }
             }
         }
     }
 });
-
 
 
 function filterDate() {
@@ -148,9 +147,6 @@ function filterDate() {
 
 
 function periodicity(event) {
-    console.log("here")
-    console.log(event.target.value)
-
     if (event.target.value === "0") {
         console.log("here 0");
         myChart.config.data.labels = totaldates;
@@ -204,6 +200,24 @@ function periodicity(event) {
 function resetDate() {
     myChart.config.data.labels = dates;
     myChart.update();
+    graphZoomReset()
+
+}
+
+function graphZoomReset() {
+    myChart.resetZoom();
+    console.log("zoom reset")
+    myChart.config.data.labels = totaldates;
+    myChart.data.datasets[0].data = totaltemperatura;
+    myChart.data.datasets[1].data = totalhumedad;
+    myChart.data.datasets[2].data = totalpresion;
+    myChart.data.datasets[3].data = totalpm25;
+    myChart.data.datasets[4].data = totalpm10;
+    myChart.config.options.scales.x.time.unit = 'day';
+    myChart.config.options.scales.x.title.text = 'DAYS';
+    console.log(myChart.config.data.datasets[0].data)
+    myChart.update();
+
 }
 
 function init() {
@@ -217,22 +231,23 @@ function init() {
     });
     document.getElementById("btnReset").addEventListener("click", function (event) {
         event.preventDefault();
-        console.log("btnReset");
         resetDate();
+        console.log("first reset");
+
 
     });
+
+
 
     document.getElementById("listPeriodicity").addEventListener("click", function (event) {
         event.preventDefault();
-        console.log("btnReset");
+        console.log("listPeriodicity");
         periodicity(event);
 
     });
-
 }
 
 window.onpageshow = function () {
     console.log("algo");
 };
 window.onload = init;
-

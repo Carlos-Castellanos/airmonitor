@@ -74,8 +74,10 @@ img {
 }
 
 .table {
-    color: white;
+    color: rgb(237, 231, 231);
+    overflow-x: auto;
 }
+
 
 .aside-1 {
     background: rgba(51, 170, 51, .1);

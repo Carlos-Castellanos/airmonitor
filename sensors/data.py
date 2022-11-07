@@ -8,43 +8,44 @@ from requests import request
 from measurements.models import Measurements
 from sensors.models import Sensor
 
-#################################################################
-###  Importación de la tabla a un dataframe de panda
+
 
 #name,measurementDate,measurementTime,Latitude,Longitude,Temperature,Humidity,Pression,PM25,PM10
 
+def generate_dataFrame(myPeriodo):
+        vacio = {'Latitude_x': {}, 'Longitude_x': {}, 'Temperature_x': {}, 'Humidity_x': {}, 'Pression_x': {}, 'PM25_x': {}, 'PM10_x': {}, 'id': {}, 'idSensor': {}, 'Temperature_y': {}, 'Humidity_y': {}, 'Pression_y': {}, 'PM25_y': {}, 'PM10_y': {}}
+    
+        fecha=str(myPeriodo).split('-')
+        AA=fecha[0]
+        MM=f'{int(fecha[1]):02d}'
+        DD=f'{int(fecha[2]):02d}'
+        try:
+            if MM=="00":
+                # print("maps Anual")
+                item = Measurements.objects.filter(measurementDate__year=AA).values()
+            elif DD=="00":
+                # print("maps Mensual")
+                item = Measurements.objects.filter(measurementDate__year=AA,measurementDate__month=MM).values()
+            else:
+                # print("maps Dia")
+                item = Measurements.objects.filter(measurementDate__year=AA,measurementDate__month=MM,measurementDate__day=DD).values()
+        except ValueError:
+            return vacio
+        
+        if (len(item)==0):
+            return vacio
+        
+        return item
+    
+
 def datasYY(myPeriodo):
-    # ## rango de fechas del periodo seleccionado
-    
-    vacio = {'Latitude_x': {}, 'Longitude_x': {}, 'Temperature_x': {}, 'Humidity_x': {}, 'Pression_x': {}, 'PM25_x': {}, 'PM10_x': {}, 'id': {}, 'idSensor': {}, 'Temperature_y': {}, 'Humidity_y': {}, 'Pression_y': {}, 'PM25_y': {}, 'PM10_y': {}}
-    
-    fecha=str(myPeriodo).split('-')
-    AA=fecha[0]
-    MM=f'{int(fecha[1]):02d}'
-    DD=f'{int(fecha[2]):02d}'
-    try:
-        if MM=="00":
-            # print("maps Anual")
-            item = Measurements.objects.filter(measurementDate__year=AA).values()
-        elif DD=="00":
-            # print("maps Mensual")
-            item = Measurements.objects.filter(measurementDate__year=AA,measurementDate__month=MM).values()
-        else:
-            # print("maps Dia")
-            item = Measurements.objects.filter(measurementDate__year=AA,measurementDate__month=MM,measurementDate__day=DD).values()
-    except ValueError:
-        return vacio
-    
-    if (len(item)==0):
-        return vacio
     ##Sensors list
     sensors = Sensor.objects.all().values()  
      
     ## Convert queryset to dataframe
-    df = pd.DataFrame(item)
+    df = pd.DataFrame(generate_dataFrame(myPeriodo))
     df_sensors = pd.DataFrame(sensors)
     # df=df.rename(columns={'idSensor':'Sensor','measurementDate':'measurementDate','measurementTime':'Time','Latitude':'Lat','Longitude':'Lon','Temperature':'Temp','Humidity':'Hum','Pression':'Pres','PM25':'PM25','PM10':'PM10'})
-
 
     # convert object to float
     df['Latitude'] = df['Latitude'].astype(float, errors = 'raise')
@@ -92,13 +93,23 @@ def tableYY(myPeriodo):
             # print("maps Dia")
             item = Measurements.objects.filter(measurementDate__year=AA,measurementDate__month=MM,measurementDate__day=DD).values()
     except ValueError:
+        print("vacio")
+        print(len(vacio))
         return vacio
     
     if (len(item)==0):
+        print("vacio")
+        print(len(vacio))
         return vacio
      
     ## Convert queryset to dataframe
-    df = pd.DataFrame(item)
+    # temp = generate_dataFrame(myPeriodo)
+    # if type(temp)
+    # df = pd.DataFrame(item)
+    # print(type(df))
+    # print(type(vacio))
+    # print(type(item))
+
 
     # convert object to float
     df['Latitude'] = df['Latitude'].astype(float, errors = 'raise')
@@ -117,12 +128,12 @@ def tableYY(myPeriodo):
     df01.fillna(0, inplace=True)
     
     mydict = {
-        "df": df.to_html(classes='table table-striped')
+        "df": df.to_html(classes='table table-dark table-striped table-hover')
     }
 
     return mydict
     
-    
+ 
     
     
 def generalMeans(myPeriodo):

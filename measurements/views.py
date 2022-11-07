@@ -109,33 +109,7 @@ def simple_upload(request):
     return render(request, 'measurements/upload.html')
 
         
-############################################################################################################################################
-# Tresting table (table.html)
-def showdata(request):
-    item = Measurements.objects.all().values()
-    myFrame = pd.DataFrame(item)
-    myFrame=myFrame.rename(columns={'idSensor':'Sensor','measurementDate':'Date','measurementTime':'Time','Latitude':'Lat','Longitude':'Lon','Temperature':'Temp','Humidity':'Hum','Pression':'Pres','PM25':'pm2.5','PM10':'pm10'})
-
-    # convert objetc to float
-    myFrame['Date'] = pd.to_datetime(myFrame['Date'])
-    myFrame['Lat'] = myFrame['Lat'].astype(float, errors = 'raise')
-    myFrame['Lon'] = myFrame['Lon'].astype(float, errors = 'raise')
-    myFrame['Temp'] = myFrame['Temp'].astype(float, errors = 'raise')
-    myFrame['Hum'] = myFrame['Hum'].astype(float, errors = 'raise')
-    myFrame['Pres'] = myFrame['Pres'].astype(float, errors = 'raise')
-    myFrame['pm2.5'] = myFrame['pm2.5'].astype(float, errors = 'raise')
-    myFrame['pm10'] = myFrame['pm10'].astype(float, errors = 'raise')
-
-    #filtrado por fechas
-    date1 = "2021-01-01"
-    date2 = "2021-01-31"
-    df = myFrame.loc[(myFrame['Date'] >= date1) & (myFrame['Date'] <= date2)]
-    df = df.groupby(['Date']).mean()
-    mydict = {
-        "filterTable": df.to_html(classes='table table-striped')
-    }
-
-    return render(request, 'measurements/table.html', context=mydict)       
+ 
         
 ############################################################################################################################################
 # Global graphs (graphs.html)
@@ -214,7 +188,11 @@ def Inicio (request):
 ############################################################################################################################################
 # Sensor Graphs  (graphs2.html)
 def graphs2 (request):
-    context = { }
+
+    context = {
+        
+
+    }
     return render(request,'measurements/graphsPlus.html',context)
 
 ############################################################################################################################################
