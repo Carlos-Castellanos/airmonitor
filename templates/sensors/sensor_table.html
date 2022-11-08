@@ -6,7 +6,9 @@
 <div class="wrapper">
     <header class="header"> Report date: {{fecha}} {{fecha2}}</header>
     <article class="main pt-2  ">
-        <div class="container col-md-11">
+        <!-- <div class="container col-md-11"> -->
+        <div class="table-wrapper ">
+
             {{df|safe}}
         </div>
     </article>
@@ -79,9 +81,7 @@
 
     </aside>
     <footer class="footer"></footer>
-    <div clase="Table">
-        {{table|safe}}
-    </div>
+
 </div>
 
 {% endblock content %}

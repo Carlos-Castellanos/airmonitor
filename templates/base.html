@@ -31,6 +31,7 @@
                     <a class="nav-link" href="{%  url 'measurements_graphs2' %}" accesskey="B">Graphs2</a>
                     <a class="nav-link" href="{%  url 'show_map' yy='2022-0-0'%}" accesskey="M">Maps</a>
                     <a class="nav-link" href="{%  url 'show_table' yy='2022-0-0'%}" accesskey="T">Tables</a>
+                    {% if request.user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false" accesskey="S">
@@ -47,10 +48,33 @@
                             <li><a class="dropdown-item" href="#">About</a></li>
                         </ul>
                     </li>
-                    <a class="nav-link " href="#">Login</a>
+
+                    {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" accesskey="S">
+                            Login
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if request.user.is_authenticated %}
+                            <li><a class="nav-link " href="{% url 'logout' %}"><strong>Logout</strong></a></li>
+                            <li><a class="nav-link " href="{% url 'password_change' %}"><strong>Change
+                                        password</strong></a>
+                            </li>
+                            {% else %}
+                            <li><a class="nav-link " href="{% url 'signup' %}"><strong>Signup</strong></a></li>
+                            <li><a class="nav-link " href="{% url 'login' %}"><strong>Login</strong></a></li>
+                            <!-- <li><a class="nav-link " href="{% url 'password_reset' %}"><strong>Reset  password</strong></a>-->
+
+                    </li>
+                    {% endif %}
+                    </ul>
+                    </li>
                 </div>
             </div>
-
+            {% if request.user.is_authenticated %}
+            <h2>Welcome: {{ request.user.username }} <h2>
+                    {% endif %}
         </div>
     </nav>
 
