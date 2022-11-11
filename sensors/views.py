@@ -5,6 +5,15 @@ from django.views.generic.edit import(
     DeleteView,
     UpdateView
 )
+
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, 
+    UserPassesTestMixin
+   )   #113
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 import folium
 from .data import *
 
@@ -30,34 +39,47 @@ class SensorDetailView(DetailView):
     template_name = "sensors/detail.html"  
     model = Sensor
 
-class SensorCreateView(CreateView): #113
+class SensorCreateView(LoginRequiredMixin, UserPassesTestMixin,  CreateView):  #113
     template_name = "sensors/new.html"  
     model = Sensor
     fields = ["idSensor","name","Latitude","Longitude","Temperature","Humidity","Pression","PM25","PM10"]  
+    permission_required = "sensors.change_sensor"
+    
+    def test_func(self):
+        # print('grupos:', self.request.user.groups.all())
+        # print('user:', self.request.user)
+        # print(self.request.user.get_group_permissions())
+        # print(self.request.user.has_perm("sensors.change_sensor")) 
+        if self.request.user.has_perm("sensors.change_sensor"):
+            return 1
+        else:
+            return 
+   
 
-    # def form_valid(self, form):       #take tha user and save it like author'field
-    #     form.instance.author = self.request.user
-    #     return super().form_valid(form)
-
-
-class SensorUpdateView(UpdateView): #113
+class SensorUpdateView(LoginRequiredMixin, UserPassesTestMixin,  UpdateView): #113
     template_name = "sensors/edit.html"  
     model = Sensor
     fields = ["idSensor","name","Latitude","Longitude","Temperature","Humidity","Pression","PM25","PM10"]   
+    permission_required = "sensors.change_sensor"
+    
+    def test_func(self):
+        if self.request.user.has_perm("sensors.change_sensor"):
+            return 1
+        else:
+            return 
 
-    def test_func(self):                                #113
-        obj = self.get_object()
-        return obj.author == self.request.user
 
-
-class SensorDeleteView(DeleteView):  #113
+class SensorDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):  #113
     template_name = "sensors/delete.html"  
     model = Sensor
     success_url = reverse_lazy('sensor_list')
-
-    def test_func(self):                                #113
-        obj = self.get_object()
-        return obj.author == self.request.user
+    permission_required = "sensors.delete_sensor"
+    
+    def test_func(self):
+        if self.request.user.has_perm("sensors.delete_sensor"):
+            return 1
+        else:
+            return 
     
 class FoliumView(TemplateView):
     template_name = "sensors/sensor_map.html"

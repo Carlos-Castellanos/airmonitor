@@ -94,19 +94,25 @@ def format_date(mydate):
         return(mydate)
     
 def simple_upload(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-          
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
+    print('grupos:', request.user.groups.all())
+    print('user:', request.user)
+    print(request.user.get_group_permissions())
+    if request.user.has_perm("measurements.change_measurements"):
+        if request.method == 'POST' and request.FILES['myfile']:
+            
+            myfile = request.FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)
 
-        print(uploaded_file_url)
-        native_import_csv(uploaded_file_url)
-        return render(request, 'measurements/upload.html',{
-            'uploaded_file_url': uploaded_file_url
-        })
-    return render(request, 'measurements/upload.html')
+            print(uploaded_file_url)
+            native_import_csv(uploaded_file_url)
+            return render(request, 'measurements/upload.html',{
+                'uploaded_file_url': uploaded_file_url
+            })
+        return render(request, 'measurements/upload.html')
+    else:
+        return render(request, '403.html')
 
         
  

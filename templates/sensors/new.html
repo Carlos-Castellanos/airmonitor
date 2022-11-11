@@ -3,6 +3,8 @@
 {% block title %}New Sensor{% endblock title %}
 
 {% block content %}
+{% if user.is_authenticated %}
+
 <div class="container mt-3 table-dark main" style="width: 35%; ">
     <br>
     <h1 table-dark>New Sensor</h1>
@@ -16,5 +18,14 @@
     </form>
     <br>
 </div>
+
+<div clas="main">
+    <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+</div>
+
+{% else %}
+<p>Please login to see this page.</p>
+{% endif %}
 
 {% endblock content %}

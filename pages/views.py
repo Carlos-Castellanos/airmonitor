@@ -16,5 +16,5 @@ class GraphPageView(TemplateView):
 class AboutPageView(TemplateView):
     template_name = "about.html"
 
-class GMapsPageView(TemplateView):
-    template_name = "gmaps.html"
+class NoAccesssPageView(TemplateView):
+    template_name = "403.html"
