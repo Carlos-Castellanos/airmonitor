@@ -12,7 +12,7 @@
             <form class="form  main">
                 <label for="">Periodicity<select id="listPeriodicity" type="number" class="form-select">
                         <option selectd hidden value="-1">-Select the periodicity-</option>
-                        <option value="0">Diary</option>
+                        <option value="0">Daily</option>
                         <option value="3">Monthly</option>
                         <option value="9">Yearly</option>
                     </select>
@@ -101,37 +101,10 @@
     const yearlypresion = {{ yearly_presion }}
     const yearlypm25 = {{ yearly_pm25 }}
     const yearlypm10 = {{ yearly_pm10 }}
+
+
 </script>
 <script
     src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <script src="/static/js/multiple.js"></script>
 {% endblock script %}
-
-
-<!-- Chart js -->
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-<!-- <script
-    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
-<script>
-    const totaldates = {{ total_dates }}
-    const totaltemperatura = {{ total_temperatura }}
-    const totalhumedad = {{ total_humedad }}
-    const totalpresion = {{ total_presion }}
-    const totalpm25 = {{ total_pm25 }}
-    const totalpm10 = {{ total_pm10 }}
-
-    const monthlydates = {{ monthly_dates }}
-    const monthlytemperatura = {{ monthly_temperatura }}
-    const monthlyhumedad = {{ monthly_humedad }}
-    const monthlypresion = {{ monthly_presion }}
-    const monthlypm25 = {{ monthly_pm25 }}
-    const monthlypm10 = {{ monthly_pm10 }}
-
-    const yearlydates = {{ yearly_dates }}
-    const yearlytemperatura = {{ yearly_temperatura }}
-    const yearlyhumedad = {{ yearly_humedad }}
-    const yearlypresion = {{ yearly_presion }}
-    const yearlypm25 = {{ yearly_pm25 }}
-    const yearlypm10 = {{ yearly_pm10 }}
-</script>
-<script src="/static/js/multiple.js"></script> -->

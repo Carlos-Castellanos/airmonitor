@@ -6,7 +6,6 @@ from .views import(
     simple_upload,
     Inicio,
     graphs2,
-    diary,
 )
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView
@@ -20,7 +19,6 @@ urlpatterns = [
     path('upload/',simple_upload, name='file_upload'),
     path('showgraphs/',Inicio, name='measurements_graphs'),
     path('graphs2/',graphs2, name='measurements_graphs2'),
-    path('', diary, name="measurements_diary"),
-    
+  
 ]
 

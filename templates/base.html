@@ -18,17 +18,15 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{%  url 'measurements_diary' %}">Air quality monitoring</a>
+            <a class="navbar-brand" href="{%  url 'home' %}">Air quality monitoring</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="{%  url 'measurements_diary' %}"
-                        accesskey="H">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{%  url 'home' %}" accesskey="H">Home</a>
                     <a class="nav-link" href="{%  url 'measurements_graphs' %}" accesskey="G">Graphs</a>
-                    <a class="nav-link" href="{%  url 'measurements_graphs2' %}" accesskey="B">Graphs2</a>
                     <a class="nav-link" href="{%  url 'show_map' yy='2022-0-0'%}" accesskey="M">Maps</a>
                     <a class="nav-link" href="{%  url 'show_table' yy='2022-0-0'%}" accesskey="T">Tables</a>
                     {% if request.user.is_authenticated %}
@@ -38,8 +36,10 @@
                             Sensors
                         </a>
                         <ul class="dropdown-menu">
+                            {% if 'administrator' == request.user.groups.all.0.name or request.user.is_superuser %}
                             <li><a class="dropdown-item" href="{% url 'file_upload' %}">file_upload</a>
                             </li>
+                            {% endif %}
                             <li><a class="dropdown-item" href="{% url 'sensor_list' %}">List Sensors</a></li>
                             <li><a class="dropdown-item" href="{% url 'sensor_new' %}">New Sensor</a></li>
                             <li>

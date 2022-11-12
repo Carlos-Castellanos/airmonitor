@@ -19,7 +19,9 @@
                     <th scope="col">Pression</th>
                     <th scope="col">PM25</th>
                     <th scope="col">PM10</th>
+                    {% if 'administrator' == request.user.groups.all.0.name or request.user.is_superuser %}
                     <th colspan="2">Actions</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody class="table-info">
@@ -34,8 +36,10 @@
                     <td> {{ sensor.Pression }} </td>
                     <td> {{ sensor.PM25 }} </td>
                     <td> {{ sensor.PM10 }} </td>
+                    {% if 'administrator' == request.user.groups.all.0.name or request.user.is_superuser %}
                     <td><a href="{% url 'sensor_edit' pk=sensor.idSensor %}" class="btn btn-success"> Edit</a></td>
                     <td><a href="{% url 'sensor_delete' pk=sensor.idSensor %}" class="btn btn-danger"> Delete </a></td>
+                    {% endif %}
 
                 </tr>
                 {% endfor %}

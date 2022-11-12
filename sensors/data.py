@@ -120,7 +120,10 @@ def tableYY(myPeriodo):
 
     return mydict
     
- 
+def delete_measures():
+    records = Measurements.objects.all()
+    records.delete()
+    return
     
     
 def generalMeans(myPeriodo):

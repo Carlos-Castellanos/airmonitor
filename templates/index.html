@@ -7,9 +7,9 @@
     <header class="header">
         <h3 class="titulo-resultado">Date: {{fecha}} </h3>
     </header>
-    <article class="main">
+    <article class="aside aside-1">
         <div class="row">
-            <div class="resumen-forma">
+            <div class="resumen-forma" id="ftemp">
                 <h2 class="titulo-forma">Temperature</h2>
                 <h3 class="titulo-resultado">{{Temperature}} °C</h3>
             </div>
@@ -21,21 +21,57 @@
                 <h2 class="titulo-forma">Pressure</h2>
                 <h3 class="titulo-resultado">{{Pression}} kPa</h3>
             </div>
-            <div class="resumen-forma">
+            <div class="resumen-forma" id="fpm25">
                 <h2 class="titulo-forma">PM25</h2>
                 <h3 class="titulo-resultado">{{PM25}} µg/m3</h3>
             </div>
-            <div class="resumen-forma">
+            <div class="resumen-forma" id="fpm10">
                 <h2 class="titulo-forma">PM10</h2>
                 <h3 class="titulo-resultado">{{PM10}} µg/m3</h3>
             </div>
         </div>
     </article>
-    <aside class="aside aside-1"><img src="/static/images/sun.png" alt="datas"></aside>
+    <aside class="main">
+        <div>
+            <h1>PM 2.5</h1>
+            <p>
+                Particulate matter, or PM 2.5, are very small particles in the air that are 2.5 micrometers (about 1
+                ten-thousandth of an inch) or less in diameter. This is less than the thickness of a human hair.
+            </p>
+            <p>
+                Particulate matter, one of the U.S. EPA's six criteria air pollutants, is a mixture that can include
+                organic chemicals, dust, soot and metals. These particles can come from cars, trucks, factories, wood
+                burning and other activities.
+            </p>
+        </div>
+        <div>
+            <h1>PM 10</h1>
+            <p>
+                PM10 can be defined as those solid or liquid particles of dust, ash, soot, metallic particles, cement or
+                pollen, dispersed in the atmosphere, and whose diameter varies between 2.5 and 10 µm (1 micrometer
+                corresponds to one thousandth of 1 millimeter).
+            </p>
+            <p>
+                They are mainly composed of inorganic compounds such as silicates and aluminates, heavy metals, among
+                others, and organic material associated with carbon particles (soot). They are characterized by a basic
+                pH due to uncontrolled combustion of materials.
+            </p>
+        </div>
+
+    </aside>
     <footer class="footer"></footer>
 </div>
 {% endblock content %}
 
 {% block script %}
-<script src="/static/js/multiple.js"></script>
+<script>
+    const temp = {{ Temperature }}
+    const hum = {{ Humidity }}
+    const Pres = {{ Pression }}
+    const pm_25 = {{ PM25 }}
+    const pm_10 = {{ PM10 }}
+
+</script>
+<script src="/static/js/alarms.js"></script>
+
 {% endblock script %}

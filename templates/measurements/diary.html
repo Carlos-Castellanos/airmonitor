@@ -9,7 +9,7 @@
     </header>
     <article class="main">
         <div class="row">
-            <div class="resumen-forma">
+            <div class="resumen-forma" id="ftemp">
                 <h2 class="titulo-forma">Temperature</h2>
                 <h3 class="titulo-resultado">{{Temperature}} °C</h3>
             </div>
@@ -21,21 +21,43 @@
                 <h2 class="titulo-forma">Pressure</h2>
                 <h3 class="titulo-resultado">{{Pression}} kPa</h3>
             </div>
-            <div class="resumen-forma">
+            <div class="resumen-forma" id="fpm25">
                 <h2 class="titulo-forma">PM25</h2>
                 <h3 class="titulo-resultado">{{PM25}} µg/m3</h3>
             </div>
-            <div class="resumen-forma">
+            <div class="resumen-forma" id="fpm10">
                 <h2 class="titulo-forma">PM10</h2>
                 <h3 class="titulo-resultado">{{PM10}} µg/m3</h3>
             </div>
         </div>
     </article>
-    <aside class="aside aside-1"><img src="/static/images/sun.png" alt="datas"></aside>
+    <aside class="aside aside-1">
+        <div>
+            <img src="/static/images/sun.png" alt="datas">
+        </div>
+        <div>
+            <p>PM stands for particulate matter (also called particle pollution).
+                PM2.5 and PM10 are harmful to your health.
+            </p>
+        </div>
+        <div>
+            <p>Click here to know more about particle pollution</p>
+        </div>
+
+    </aside>
     <footer class="footer"></footer>
 </div>
 {% endblock content %}
 
 {% block script %}
+<script>
+    const temp = {{ Temperature }}
+    const hum = {{ Humidity }}
+    const Pres = {{ Pression }}
+    const pm_25 = {{ PM25 }}
+    const pm_10 = {{ PM10 }}
+
+</script>
 <script src="/static/js/multiple.js"></script>
+<script src="/static/js/alarms.js"></script>
 {% endblock script %}

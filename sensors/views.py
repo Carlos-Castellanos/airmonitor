@@ -165,6 +165,8 @@ class SensorTables(TemplateView):
     model = Sensor
     
     def get_context_data(self, **kwargs):
+        # delete_measures()    #delete all mesaurements be careful!!!
+        
         print(kwargs["yy"])
         context = tableYY(kwargs["yy"])
         

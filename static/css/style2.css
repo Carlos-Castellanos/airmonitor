@@ -24,8 +24,8 @@
 
     margin: 10px auto;
     padding: 3px .3em;
-    height: 55px;
-    width: 130px;
+    height: 40px;
+    width: 90px;
 
     border-radius: 10px;
     text-align: center;
@@ -35,13 +35,13 @@
 }
 
 .titulo-forma {
-    font-size: 100%;
+    font-size: .7rem;
     padding: 1px .3em;
     color: beige;
 }
 
 .titulo-resultado {
-    font-size: 90%
+    font-size: .7rem;
 }
 
 .titulo-rango {
