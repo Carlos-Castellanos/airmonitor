@@ -13,7 +13,7 @@ from sensors.models import Sensor
 #name,measurementDate,measurementTime,Latitude,Longitude,Temperature,Humidity,Pression,PM25,PM10
 
 def generate_dataFrame(myPeriodo):
-        vacio = {'Latitude_x': {}, 'Longitude_x': {}, 'Temperature_x': {}, 'Humidity_x': {}, 'Pression_x': {}, 'PM25_x': {}, 'PM10_x': {}, 'id': {}, 'idSensor': {}, 'Temperature_y': {}, 'Humidity_y': {}, 'Pression_y': {}, 'PM25_y': {}, 'PM10_y': {}}
+        vacio = {'measurementDate':{},'measurementTime':{},'Temperature': {}, 'Humidity': {}, 'Pression': {}, 'PM25': {}, 'PM10': {}, 'id': {}, 'idSensor_id': {}}
     
         fecha=str(myPeriodo).split('-')
         AA=fecha[0]
@@ -41,15 +41,16 @@ def generate_dataFrame(myPeriodo):
 def datasYY(myPeriodo):
     ##Sensors list
     sensors = Sensor.objects.all().values()  
-     
+    #vacio = {'Temperature': "n/a", 'Humidity': "n/a", 'Pression': "n/a", 'PM25': "n/a", 'PM10': "n/a", 'fecha': today.strftime('%y-%m-%d')}
+        
     ## Convert queryset to dataframe
     df = pd.DataFrame(generate_dataFrame(myPeriodo))
     df_sensors = pd.DataFrame(sensors)
     # df=df.rename(columns={'idSensor':'Sensor','measurementDate':'measurementDate','measurementTime':'Time','Latitude':'Lat','Longitude':'Lon','Temperature':'Temp','Humidity':'Hum','Pression':'Pres','PM25':'PM25','PM10':'PM10'})
 
     # convert object to float
-    df['Latitude'] = df['Latitude'].astype(float, errors = 'raise')
-    df['Longitude'] = df['Longitude'].astype(float, errors = 'raise')
+    # df['Latitude'] = df['Latitude'].astype(float, errors = 'raise')
+    # df['Longitude'] = df['Longitude'].astype(float, errors = 'raise')
     df['Temperature'] = df['Temperature'].astype(float, errors = 'raise')
     df['Humidity'] = df['Humidity'].astype(float, errors = 'raise')
     df['Pression'] = df['Pression'].astype(float, errors = 'raise')

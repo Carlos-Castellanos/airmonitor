@@ -94,9 +94,9 @@ def format_date(mydate):
         return(mydate)
     
 def simple_upload(request):
-    print('grupos:', request.user.groups.all())
-    print('user:', request.user)
-    print(request.user.get_group_permissions())
+    # print('grupos:', request.user.groups.all())
+    # print('user:', request.user)
+    # print(request.user.get_group_permissions())
     if request.user.has_perm("measurements.change_measurements"):
         if request.method == 'POST' and request.FILES['myfile']:
             

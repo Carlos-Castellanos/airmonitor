@@ -6,26 +6,122 @@
 <div class="wrapper">
     <header class="header">Today measures</header>
     <article class="main">
-        <img src="static/images/datagraph1.png" alt="datas">
-    </article>
-    <aside class="aside aside-1">
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium laboriosam obcaecati itaque rem ad
-            amet nisi minus odit impedit nemo repellat, in consectetur, nulla dolor dicta. Quas voluptas id nemo?
+        <h1>AirMonitor System</h1>
+        <h2>Project Description</h2>
+        <p>
+            This system allows you to keep track of temperature, humidity, ambient pressure, pm2.5 and pm10 measurements
+            in your city or area of interest, through multiple sensors distributed throughout the city of Mexicali. The
+            system allows any user to visualize the current measurements, however this system is aimed at air quality
+            researchers, users of this type, have the ability to access annual, monthly and daily graphs where they can
+            analyze the behavior of air quality through the five indicators (temperature, humidity, ambient pressure,
+            pm2.5 and pm10). In addition, they can see on maps the geolocation of the sensors and the average
+            measurements that exist in each one of them.
         </p>
-    </aside>
-    <aside class="aside aside-2">
+        <p>
+            To analyze the raw data, it is also possible to view the actual measurements in a given period of time,
+            which gives the possibility to work according to the areas of interest. Research users have access to the
+            list of active sensors and their exact geolocation.
+            Finally, the system has an administrator user, who has the power to manage the sensors, update the
+            information collected by the sensors through csv files (stored in the folder data.csv 2020.csv, 2021.csv and
+            2022.csv; For testing purposes the data were randomly generated).
+        </p>
+        <h2>The technologies used</h2>
+        <p>
+            crispy-bootstrap5==0.7
+        </p>
+        <p>
+            Django==4.1.2
+        </p>
+        <p>
+            django-admin-rangefilter==0.9.0
+        </p>
+        <p>
+            django-crispy-forms==1.14.0
+        </p>
+        <p>
+            django-import-export==2.9.0
+        </p>
+        <p>
+            folium==0.13.0
+        </p>
+        <p>
+            Jinja2==3.1.2
+        </p>
+        <p>
+            numpy==1.23.3
+        </p>
+        <p>
+            pandas==1.5.0
+        </p>
+        <p>
+            Python 3.8.10
+        </p>
+        <p>
+            Javascripy
+        </p>
+        <p>
+            Graph.js==3.1
+        </p>
+        <h2>The functionality it has (what works and what doesn't).</h2>
+        <p>
+            The system complies with the loading of csv files, the CRUD of the sensors, the validation of users
+            (administrator, researcher and anonymous), generates the mapping of the sensors and displays the data
+            according to the selected period, displays the data in tabular form also filtered by time periods. on the
+            main screen presents the average of medicines of the current date and for the temperature indicators, pm 25.
+            and pm10 uses a color code in the box where they are displayed according to the level of risk.
+            The graphs section displays information for the year 2021 (the option to change the year has not been
+            integrated) and allows the data to be filtered for that period, either by a specific period of time or
+            averaged by day, month or year. Additionally, the option to zoom in and out has been integrated.
+            The functions of the "measurements" app have yet to be migrated to classes.
+            Some validations, for example if the database is empty the graphs page crashes. This is validated in the
+            sensor map, the main page and the table but not in the graphs. The Change password option is not functional,
+            the email part was not configured
+        </p>
+        <h2>The steps to run the project</h2>
+        <p>
+            The main menu consists of Home, Graphs, Maps, Maps, Tables, Sensors and Login.
+        </p>
+        <p>
+            Home: It is the main page and has information about the measurements of the indicators of the current date.
+        </p>
+        <p>
+            Graphs: Allows you to view the graphs, with the selection of period, which can be daily, i.e. all the
+            average daily measurements during the year; monthly, the average monthly measurements of the year; and
+            finally annual, the average annual measurements of all the years.
+            Additionally, at the bottom you can select a specific period of dates, the filter button is to expand the
+            selected period and the reset button is to return to the daily measurements of the whole year.
+            A relevant point is that you can also zoom by selecting with the mouse a specific area of the graph, the
+            reset button will restore the original graph.
+        </p>
+        <p>
+            Maps: In this section a map is displayed indicating the points where the sensors are located, by clicking on
+            them you can see the average information of each indicator of that sensor. You can select whether the
+            information is annual (indicating the desired year), monthly (indicating year and month) and finally daily
+            (indicating the specific day).
+        </p>
+        <p>
+            Tables: This option displays in tabular form the complete information, without averaging filter, for a
+            period of time. This can be a whole year, a single month or a particular day.
+        </p>
+        <p>
+            Sensor: This option has a submenu:
+            • upload information: Allows to upload the information collected by the sensors, only the administrator
+            user.
+            • List Sensor: Displays the information of the sensors, only research users and administrators can see them,
+            and only the latter can edit or delete them.
+            • New Sensor: Allows the administrator user to create new sensors.
+        </p>
+        <p>
+            Login tiene varias opciones:
+            • Login: Permite al usuario autorizado registrarse en el sistema para iniciar sesion
+            • Logout: Permite terminar la sesión
+            • Change password: Permite cambiar el password del usuario
+            • Singup: Permite a cualquier persona crear una cuenta, sin embargo esa cuenta no tiene ningun acceso
+            adicional, el administrador sera quien asigne los privilegios de investigador o en su caso de adminstrador
 
-        <label for="">Periodicity<select id="txtStatus" type="number" class="form-select">
-                <option selectd hidden value="-1">-Select the periodicity-</option>
-                <option value="0">Diary</option>
-                <option value="1">Weekly</option>
-                <option value="3">Monthly</option>
-                <option value="6">Completed</option>
-                <option value="9">Yearly</option>
-            </select>
-        </label>
-    </aside>
-    <footer class="footer">Today is a great day to go for a walk</footer>
+        </p>
+    </article>
+    <footer class="footer"></footer>
 </div>
 
 {% endblock content %}
