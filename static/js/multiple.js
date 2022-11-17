@@ -122,7 +122,7 @@ let myChart = new Chart(ctx, {
                         enabled: true,
                         backgroundColor: 'rgba(108, 122, 137, 0.3)', //this color is called Lynch
                     },
-                    mode: 'xy',
+                    mode: 'x',
                 }
             }
         }
